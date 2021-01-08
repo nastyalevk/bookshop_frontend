@@ -23,8 +23,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    this.authService.login(this.form).subscribe(
+  onSubmit(): void {
+    const { username, password } = this.form;
+
+    this.authService.login(username, password).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
 
   reloadPage() {
     window.location.reload();
