@@ -1,0 +1,28 @@
+<div class="container">
+  <header class="jumbotron">
+    <table class="table">
+      <!-- <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Genre</th>
+          <th scope="col">Publ. year</th>
+          <th scope="col">Pages</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead> -->
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.id }}</td>
+          <td>{{ book.bookName }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.genre }}</td>
+          <td>{{ book.publicationYear }}</td>
+          <td>{{ book.pages }}</td>
+          <td>{{ book.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </header>
+</div>
