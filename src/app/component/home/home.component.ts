@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../book/book';
-import { UserService } from '../_services/user.service';
+import { Book } from '../../model/book/book';
+import { UserService } from '../../_services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getPublicContent().subscribe(
-      data => {
+      data =>{
         this.books = data;
       }
     );

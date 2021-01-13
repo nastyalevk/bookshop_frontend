@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { AuthService } from '../../../_services/auth/auth.service';
+import { TokenStorageService } from '../../../_services/token/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  token: string | undefined;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+      this.token = this.tokenStorage.getUser().token;
     }
   }
 
@@ -28,9 +30,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
-
+        this.tokenStorage.saveToken(this.tokenStorage.getUser().token);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;

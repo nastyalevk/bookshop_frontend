@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
-
+import { User } from 'src/app/model/user/user';
+import { UserService } from '../../../_services/user/user.service';
 @Component({
   selector: 'app-board-admin',
   templateUrl: './board-admin.component.html',
@@ -9,16 +9,16 @@ import { UserService } from '../_services/user.service';
 export class BoardAdminComponent implements OnInit {
   content = '';
 
+  users: User[] | undefined;
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getAdminBoard().subscribe(
+    this.userService.findAll().subscribe(
       data => {
-        this.content = data;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
+        this.users = data;
       }
     );
+    
   }
 }
