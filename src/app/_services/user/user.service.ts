@@ -26,8 +26,22 @@ export class UserService {
   }
 
   findAll(): Observable<User[]> {
-    return this.http.get<User[]>(API_URL + 'user');
+    const users = this.http.get<User[]>(API_URL + 'user');
+    return users;
   }
 
+  getOne(id: number): Observable<any>{
+    return this.http.get(API_URL + 'user/' + id);
+  }
+
+  save(user: User) {
+    console.log(user);
+    return this.http.post<User>(API_URL + 'user/create/',  user);
+  }
+
+  update(user: User) {
+    console.log(user);
+    return this.http.post<User>(API_URL + 'user/update/',  user);
+  }
   
 }

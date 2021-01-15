@@ -6,7 +6,8 @@ import { BoardOwnerComponent } from './component/board/board-owner/board-owner.c
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/auth/login/login.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { RegisterComponent } from './component/register/register.component';
+import { RegisterComponent } from './component/auth/register/register.component';
+import { UserComponent } from './component/user/user.component';
 
 
 const routes: Routes = [
@@ -17,8 +18,8 @@ const routes: Routes = [
   { path: 'client', component: BoardClientComponent },
   { path: 'owner', component: BoardOwnerComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'edit-user/:id', component: UserComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
-
 ];
 
 @NgModule({

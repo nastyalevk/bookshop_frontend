@@ -5,15 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/auth/login/login.component';
-import { RegisterComponent } from './component/register/register.component';
+import { RegisterComponent } from './component/auth/register/register.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { BoardAdminComponent } from './component/board/board-admin/board-admin.component';
 import { BoardOwnerComponent } from './component/board/board-owner/board-owner.component';
 import { BoardClientComponent } from './component/board/board-client/board-client.component';
-
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
-
+import { AgGridModule } from 'ag-grid-angular';
+import { UserComponent } from './component/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,17 +23,19 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ProfileComponent,
     BoardAdminComponent,
     BoardOwnerComponent,
-    BoardClientComponent
+    BoardClientComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AgGridModule.withComponents([])
   ],
   providers: [
-    authInterceptorProviders
+    authInterceptorProviders, BoardAdminComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, BoardAdminComponent]
 })
 export class AppModule { }
