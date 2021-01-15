@@ -35,6 +35,7 @@
           <button *ngIf="!getRoleStatus('ROLE_CLIENT')" class=" btn-primary btn-raised text-white float-center mt-3"
             (click)="changeRoleStatusClient(true)">activate</button>
         </div>
+        
         <div class="form-group">
         <label><strong>Role owner:</strong></label>
         {{ getRoleStatus("ROLE_OWNER") ? "active" : " not active" }}

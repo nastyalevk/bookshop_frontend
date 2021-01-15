@@ -14,6 +14,7 @@ import { BoardClientComponent } from './component/board/board-client/board-clien
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AgGridModule } from 'ag-grid-angular';
 import { UserComponent } from './component/user/user.component';
+import { UserFormComponent } from './component/user-form/user-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { UserComponent } from './component/user/user.component';
     BoardAdminComponent,
     BoardOwnerComponent,
     BoardClientComponent,
-    UserComponent
+    UserComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,

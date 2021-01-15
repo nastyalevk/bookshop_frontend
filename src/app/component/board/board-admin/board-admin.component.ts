@@ -51,7 +51,10 @@ export class BoardAdminComponent implements OnInit {
       let id = this.row[0].id
       this.router.navigate([`edit-user/${id}`])
     }
-    localStorage.clear();
+  }
+
+  addNew(){
+    this.router.navigate(['new']);
   }
 
 }

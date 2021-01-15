@@ -8,6 +8,7 @@ import { LoginComponent } from './component/auth/login/login.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/auth/register/register.component';
 import { UserComponent } from './component/user/user.component';
+import { UserFormComponent } from './component/user-form/user-form.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'owner', component: BoardOwnerComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'edit-user/:id', component: UserComponent},
+  { path: 'new', component: UserFormComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
