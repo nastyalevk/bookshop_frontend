@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
   onSubmit() {
     this.user.roles = this.rolesToEntity();
     console.log(this.user.roles);
-    this.userService.update(this.user).subscribe(result => this.gotoUserList());
+    this.userService.save(this.user).subscribe(result => this.gotoUserList());
   }
 
   gotoUserList() {

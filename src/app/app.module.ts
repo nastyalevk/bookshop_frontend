@@ -15,6 +15,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AgGridModule } from 'ag-grid-angular';
 import { UserComponent } from './component/user/user.component';
 import { UserFormComponent } from './component/user-form/user-form.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { UserFormComponent } from './component/user-form/user-form.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]), 
+    NgxPaginationModule
   ],
   providers: [
     authInterceptorProviders, BoardAdminComponent

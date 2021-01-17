@@ -9,9 +9,10 @@ import { UserService } from 'src/app/_services/user/user.service';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent{
   user: User;
   roles: string[] = [];
+  status = '';
   constructor(
     private route: ActivatedRoute, 
       private router: Router, 
@@ -19,8 +20,8 @@ export class UserFormComponent implements OnInit {
     this.user = new User();
     this.user.activated = true;
     console.log(this.user.activated);
+    this.status = 'Unbaned';
   }
-  ngOnInit() {  }
 
   onSubmit() {
     this.user.roles = this.rolesToEntity();
@@ -42,8 +43,15 @@ getRoleStatus(role: string){
   return result;
 }
 
-  activatedChange(state: boolean) {
-    this.user.activated = state;
+  activatedChange() {
+    if (this.user.activated == true) {
+      this.user.activated = false;
+      this.status = "Baned";
+    }else{
+      this.user.activated = true;
+      this.status = "Unbaned";
+    }
+    console.log(this.status)
   }
   getActivated(): boolean{
     let result = false;

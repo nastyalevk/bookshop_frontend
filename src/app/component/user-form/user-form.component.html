@@ -1,26 +1,23 @@
 <div class="card my-5">
     <div class="card-body">
-        <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+        <form #userForm="ngForm">
             <div class="form-group">
                 <label for="username">username</label>
                 <input class="form-control" type="text" [(ngModel)]="user.username" id="username" name="username"
                     placeholder="Enter username" required #username="ngModel">
             </div>
-            <div [hidden]="!username.pristine" class="alert alert-danger">username is required</div>
 
             <div class="form-group">
                 <label for="email">Email</label>
                 <input class="form-control" type="text" [(ngModel)]="user.email" id="email" name="email"
                     placeholder="Enter email" required #email="ngModel">
             </div>
-            <div [hidden]="!email.pristine" class="alert alert-danger">email is required</div>
 
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="text" [(ngModel)]="user.password" class="form-control" id="password" name="password"
                     placeholder="Enter your password">
             </div>
-            <div [hidden]="!password.pristine" class="alert alert-danger">password is required</div>
 
             <div class="form-group">
                 <label for="firstName">First Name</label>
@@ -34,21 +31,13 @@
             </div>
 
             <div class="form-group">
-                <label><strong>Status:</strong></label>
-                <div [(ngModel)]="user.activated" *ngIf="getActivated()">
-                    <button class=" btn-primary btn-raised text-white float-center mt-3"
-                        (click)="activatedChange(false)" id="activated" name="activated" [(ngModel)]="user.activated">
-                        Ban user </button>
-                </div>
-                <div [(ngModel)]="user.activated" *ngIf="! getActivated()">
-                    <button class=" btn-primary btn-raised text-white float-center mt-3" (click)="activatedChange(true)"
-                        id="activated" name="activated" [(ngModel)]="user.activated"> Unban user </button>
-                </div>
+                <label><strong>User status: </strong></label>
+                <button class="btn-primary btn-raised text-white float-center mt-3" (click)="activatedChange()">
+                    {{ status }}</button>
             </div>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label><strong>Role client:</strong></label>
-                {{ getRoleStatus("ROLE_CLIENT") ? "active" : " not active" }}
                 <button class=" btn-primary btn-raised text-white float-center mt-3"
                     *ngIf="getRoleStatus('ROLE_CLIENT')" (click)="changeRoleStatusClient(false)">deactivate</button>
                 <button *ngIf="!getRoleStatus('ROLE_CLIENT')"
@@ -57,7 +46,6 @@
             </div>
             <div class="form-group">
                 <label><strong>Role owner:</strong></label>
-                {{ getRoleStatus("ROLE_OWNER") ? "active" : " not active" }}
                 <button class=" btn-primary btn-raised text-white float-center mt-3" *ngIf="getRoleStatus('ROLE_OWNER')"
                     (click)="changeRoleStatusOwner(false)">deactivate</button>
                 <button *ngIf="!getRoleStatus('ROLE_OWNER')"
@@ -67,13 +55,12 @@
 
             <div class="form-group">
                 <label><strong>Role admin:</strong></label>
-                {{ getRoleStatus("ROLE_ADMIN") ? "active" : " not active" }}
                 <button class=" btn-primary btn-raised text-white float-center mt-3" *ngIf="getRoleStatus('ROLE_ADMIN')"
                     (click)="changeRoleStatusAdmin(false)">deactivate</button>
                 <button *ngIf="!getRoleStatus('ROLE_ADMIN')"
                     class=" btn-primary btn-raised text-white float-center mt-3"
                     (click)="changeRoleStatusAdmin(true)">activate</button>
-            </div> -->
+            </div>
 
 
             <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-info"
