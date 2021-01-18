@@ -35,7 +35,7 @@
             <p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
             <div class="alert alert-warning" *ngIf="f.submitted && !isLoggedIn">
               Login failed!
-            </div>
+            </div><br />{{ errorMessage }}
           </form>
           <div class="alert alert-success" *ngIf="isLoggedIn">
             Logged in as {{ roles }}.

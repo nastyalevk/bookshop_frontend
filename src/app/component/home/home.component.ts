@@ -20,8 +20,8 @@ export class HomeComponent implements OnInit {
 
   page = 1;
   count = 0;
-  pageSize = 10;
-  pageSizes = [10, 5];
+  pageSize = 9;
+  pageSizes = [9, 12, 15];
 
   constructor(private bookService: BookService) { }
 

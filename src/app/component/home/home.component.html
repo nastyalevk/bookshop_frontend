@@ -6,32 +6,21 @@
   [paginationAutoPageSize]="true"
   [pagination]="true"
   ></ag-grid-angular> -->
+  <h4>Books List</h4>
 
-  <!-- <div class="list row"> -->
-  <!-- <div class="col-md-8">
+  <div class="list row">
+    <!-- <div class="col-md-8"> -->
     <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search by book title"
-        [(ngModel)]="bookName"
-      />
+      <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="bookName" />
       <div class="input-group-append">
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          (click)="retrieveBooks()"
-        >
+        <button class="btn btn-outline-secondary" type="button" (click)="retrieveBooks()">
           Search
         </button>
       </div>
+      <!-- </div> -->
     </div>
-  </div> -->
 
-  <!-- <div class="col-md-6"> -->
-  <h4>Books List</h4>
-
-  <ul class="list-group">
+    <!-- <ul class="list-group"> -->
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
@@ -57,11 +46,11 @@
         </tr>
       </tbody>
     </table>
-  </ul>
+    <!-- </ul> -->
 
-  <div class="mt-3">
+    <!-- <div class="mt-3"> -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-12">
         Items per Page:
         <select (change)="handlePageSizeChange($event)">
           <option *ngFor="let size of pageSizes" [ngValue]="size">
@@ -69,11 +58,13 @@
           </option>
         </select>
       </div>
-      <div class="col-md-4">
+     
+    </div>
+    <div class="col-md-10">
+      <div class="text-right">
         <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
           (pageChange)="handlePageChange($event)"></pagination-controls>
       </div>
     </div>
   </div>
 </div>
-<!-- </div> -->
