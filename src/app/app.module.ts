@@ -11,7 +11,7 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { BoardAdminComponent } from './component/board/board-admin/board-admin.component';
 import { BoardOwnerComponent } from './component/board/board-owner/board-owner.component';
 import { BoardClientComponent } from './component/board/board-client/board-client.component';
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { AgGridModule } from 'ag-grid-angular';
 import { UserComponent } from './component/user/user.component';
 import { UserFormComponent } from './component/user-form/user-form.component';
