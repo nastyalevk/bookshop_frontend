@@ -29,7 +29,6 @@ export class UserService {
     const users = this.http.get<User[]>(API_URL + 'user');
     return users;
   }
-
   getOne(id: number): Observable<any>{
     return this.http.get(API_URL + 'user/' + id);
   }

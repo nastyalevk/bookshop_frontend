@@ -11,7 +11,9 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(params:any): Observable<any>{
-    return this.http.get<any>(bookUrl, {params})
+  getAll(params: any): Observable<any> {
+    let result = this.http.get<any>(bookUrl, { params });
+    // console.log(result);
+    return result;
   }
 }
