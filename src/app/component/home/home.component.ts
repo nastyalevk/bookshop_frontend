@@ -6,6 +6,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
 import { _ } from 'ag-grid-community';
 import { BookService } from 'src/app/_services/book/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   pageSize = 9;
   pageSizes = [9, 12, 15];
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, protected router: Router) { }
 
   ngOnInit(): void {
     this.retrieveBooks();
@@ -87,5 +88,9 @@ export class HomeComponent implements OnInit {
     this.currentBook = book;
     this.currentIndex = index;
   }
+
+  LinktoBook(id: number){        
+    this.router.navigate([`book/${id}`]);
+}
 
 }

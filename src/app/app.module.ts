@@ -16,6 +16,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { UserComponent } from './component/user/user.component';
 import { UserFormComponent } from './component/user-form/user-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BookComponent } from './component/book/book.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BoardOwnerComponent,
     BoardClientComponent,
     UserComponent,
-    UserFormComponent
+    UserFormComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule
   ],
   providers: [
-    authInterceptorProviders, BoardAdminComponent
+    authInterceptorProviders, BoardAdminComponent, HomeComponent
   ],
   bootstrap: [AppComponent, BoardAdminComponent]
 })

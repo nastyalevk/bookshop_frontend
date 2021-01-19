@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const bookUrl = 'http://localhost:8087/book';
+const bookUrl = 'http://localhost:8087/book/';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +15,9 @@ export class BookService {
     let result = this.http.get<any>(bookUrl, { params });
     // console.log(result);
     return result;
+  }
+
+  getOne(id: number): Observable<any>{
+    return this.http.get(bookUrl + id);
   }
 }

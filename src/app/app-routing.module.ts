@@ -9,6 +9,7 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/auth/register/register.component';
 import { UserComponent } from './component/user/user.component';
 import { UserFormComponent } from './component/user-form/user-form.component';
+import { BookComponent } from './component/book/book.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'admin', component: BoardAdminComponent },
   { path: 'edit-user/:id', component: UserComponent},
   { path: 'new', component: UserFormComponent},
+  {path: 'book/:id', component: BookComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

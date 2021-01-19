@@ -38,8 +38,10 @@
                   totalItems: count
                 };
           let i = index
-        " [class.active]="i == currentIndex" (click)="setActiveBook(book, i)">
-          <td>{{ book.bookName }}</td>
+        " [class.active]="i == currentIndex" 
+        (click)="setActiveBook(book, i)"
+        >
+          <td (click)="LinktoBook(book.id)">{{ book.bookName }}</td>
           <td>{{ book.author }}</td>
           <td>{{ book.genre }}</td>
           <td>{{ book.publicationYear }}</td>
