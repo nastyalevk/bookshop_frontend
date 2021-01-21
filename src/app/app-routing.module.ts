@@ -10,6 +10,7 @@ import { RegisterComponent } from './component/auth/register/register.component'
 import { UserComponent } from './component/user/user.component';
 import { UserFormComponent } from './component/user-form/user-form.component';
 import { BookComponent } from './component/book/book.component';
+import { CartComponent } from './component/cart/cart.component';
 
 
 const routes: Routes = [
@@ -20,9 +21,10 @@ const routes: Routes = [
   { path: 'client', component: BoardClientComponent },
   { path: 'owner', component: BoardOwnerComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: 'edit-user/:id', component: UserComponent},
-  { path: 'new', component: UserFormComponent},
-  {path: 'book/:id', component: BookComponent},
+  { path: 'edit-user/:id', component: UserComponent },
+  { path: 'new', component: UserFormComponent },
+  { path: 'book/:id', component: BookComponent },
+  { path: 'cart', component: CartComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

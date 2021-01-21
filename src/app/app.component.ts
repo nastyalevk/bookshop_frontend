@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   showAdminBoard = false;
   showOwnerBoard = false;
+  showClientBoard = false;
   username?: string | undefined;
 
   constructor(private tokenStorageService: TokenStorageService) { }
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showOwnerBoard = this.roles.includes('ROLE_OWNER');
+      this.showClientBoard = this.roles.includes('ROLE_CLIENT');
 
       this.username = user.username;
     }

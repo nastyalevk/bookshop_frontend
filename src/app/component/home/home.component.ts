@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../model/book/book';
-import { UserService } from '../../_services/user/user.service';
-import { AgGridAngular } from 'ag-grid-angular';
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
-import { _ } from 'ag-grid-community';
 import { BookService } from 'src/app/_services/book/book.service';
 import { Router } from '@angular/router';
 
@@ -18,20 +13,22 @@ export class HomeComponent implements OnInit {
   currentBook?: Book;
   currentIndex = -1;
   bookName = '';
+  sort = "id_asc";
 
   page = 1;
   count = 0;
   pageSize = 9;
   pageSizes = [9, 12, 15];
+  columnSort = 0;
 
-  constructor(private bookService: BookService, protected router: Router) { }
+  constructor(private bookService: BookService, protected router: Router) {
+  }
 
   ngOnInit(): void {
     this.retrieveBooks();
   }
 
-  getRequestParams(searchTitle: string, page: number, pageSize: number): any {
-    // tslint:disable-next-line:prefer-const
+  getRequestParams(searchTitle: string, page: number, pageSize: number, sort: string): any {
     let params: any = {};
 
     if (searchTitle) {
@@ -46,20 +43,23 @@ export class HomeComponent implements OnInit {
       params[`size`] = pageSize;
     }
 
+    if (sort) {
+      params[`sort`] = sort;
+    }
+
     return params;
   }
-
   retrieveBooks(): void {
     console.log(this.pageSize);
-    const params = this.getRequestParams(this.bookName, this.page, this.pageSize);
+    const params = this.getRequestParams(this.bookName, this.page, this.pageSize, this.sort);
 
     this.bookService.getAll(params)
       .subscribe(
         response => {
-          const { books, totalItems } = response.body;
+          const { content, totalElements } = response.body;
 
-          this.books = books;
-          this.count = totalItems;
+          this.books = content;
+          this.count = totalElements;
           console.log(response);
         },
         error => {
@@ -89,8 +89,21 @@ export class HomeComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  LinktoBook(id: number){        
+  LinktoBook(id: number) {
     this.router.navigate([`book/${id}`]);
-}
+  }
 
+  sortTable(column: string) {
+    console.log(column)
+    if (this.columnSort) {
+      this.sort = column + "_asc";
+      this.columnSort = 0;
+    }
+    else {
+      this.sort = column + "_desc";
+      this.columnSort = 1;
+    }
+    console.log(this.sort)
+    this.retrieveBooks();
+  }
 }

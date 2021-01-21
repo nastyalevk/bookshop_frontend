@@ -14,7 +14,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getPublicContent(): Observable<any> {
-    return this.http.get<Book[]>(API_URL+'book');
+    return this.http.get<Book[]>(API_URL + 'book');
   }
 
   getUserBoard(): Observable<any> {
@@ -29,18 +29,16 @@ export class UserService {
     const users = this.http.get<User[]>(API_URL + 'user');
     return users;
   }
-  getOne(id: number): Observable<any>{
+  getOne(id: number): Observable<any> {
     return this.http.get(API_URL + 'user/' + id);
   }
 
   save(user: User) {
     console.log(user);
-    return this.http.post<User>(API_URL + 'user/create/',  user);
+    return this.http.post<User>(API_URL + 'user/create/', user);
   }
 
-  update(user: User) {
-    console.log(user);
-    return this.http.post<User>(API_URL + 'user/update/',  user);
+  updateRoles(params: any) {
+    return this.http.get<any>(API_URL + 'user/update-roles/', { params });
   }
-  
 }

@@ -17,6 +17,7 @@ import { UserComponent } from './component/user/user.component';
 import { UserFormComponent } from './component/user-form/user-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BookComponent } from './component/book/book.component';
+import { CartComponent } from './component/cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { BookComponent } from './component/book/book.component';
     BoardClientComponent,
     UserComponent,
     UserFormComponent,
-    BookComponent
+    BookComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

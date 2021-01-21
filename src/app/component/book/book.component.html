@@ -1,38 +1,42 @@
 <div class="card">
 	<div class="row">
 		<aside class="col-sm-12">
-<article class="card-body p-5">
-	<h3 class="title mb-3">{{book.bookName}}</h3>
+			<article class="card-body p-5">
+				<h3 class="title mb-3">{{book.bookName}}</h3>
 
-<p class="price-detail-wrap"> 
-	<span class="price h3 text-warning"> 
-		<span class="currency">currency</span><span class="num">number</span>
-	</span> 
-</p>
-<dl class="item-property">
-	<dt>Author: </dt>
-	<dd><p>{{book.author}}</p></dd>
-  </dl>
-  <dl class="param param-feature">
-	<dt>Genre: </dt>
-	<dd>{{book.genre}}</dd>
-  </dl>
-<hr>
-<dl class="item-property">
-  <dt>Description</dt>
-  <dd><p>{{book.description}}</p></dd>
-</dl>
-<dl class="param param-feature">
-  <dt>Publication year: </dt>
-  <dd>{{book.publicationYear}}</dd>
-</dl>
-<dl class="param param-feature">
-	<dt>Pages: </dt>
-	<dd>{{book.pages}}</dd>
-  </dl>
-<hr>
-	<button class="btn btn-primary btn-raised text-white"> <i class="fas fa-shopping-cart"></i> Add to cart </button>
-</article>
+				<p class="price-detail-wrap">
+					<span class="price h3 text-warning">
+						<span class="currency">currency</span><span class="num">number</span>
+					</span>
+				</p>
+				<dl class="item-property">
+					<dt>Author: </dt>
+					<dd>
+						<p>{{book.author}}</p>
+					</dd>
+				</dl>
+				<hr>
+				<dl class="param param-feature" *ngIf="book.genre">
+					<dt>Genre: </dt>
+					<dd>{{book.genre}}</dd>
+				</dl>
+				<dl class="item-property" *ngIf="book.description">
+					<dt>Description: </dt>
+					<dd>
+						<p>{{book.description}}</p>
+					</dd>
+				</dl>
+				<dl class="param param-feature" *ngIf="book.publicationYear">
+					<dt>Publication year: </dt>
+					<dd>{{book.publicationYear}}</dd>
+				</dl>
+				<dl class="param param-feature" *ngIf="book.pages">
+					<dt>Pages: </dt>
+					<dd>{{book.pages}}</dd>
+				</dl>
+				<button class="btn btn-primary btn-raised text-white"> <i class="fas fa-shopping-cart"></i> Add to cart
+				</button>
+			</article>
 		</aside>
 	</div>
 </div>
