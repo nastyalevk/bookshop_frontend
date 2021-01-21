@@ -12,6 +12,7 @@ export class BookComponent implements OnInit {
 
   id: number;
   book: Book;
+  price: any;
 
   constructor(private route: ActivatedRoute,
     private bookService: BookService) {
@@ -25,6 +26,10 @@ export class BookComponent implements OnInit {
       this.book = data;
       console.log(this.book);
     })
+    this.bookService.getPrice(this.id).subscribe(data =>{
+      this.price = data;
+      console.log(this.price)
+    });
   }
 
 }
