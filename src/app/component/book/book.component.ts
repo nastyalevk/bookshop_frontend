@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { Book } from 'src/app/model/book/book';
 import { Shop } from 'src/app/model/shop/shop';
 import { BookService } from 'src/app/_services/book/book.service';
@@ -16,8 +17,8 @@ export class BookComponent implements OnInit {
   book: Book;
   price: any;
   shops: Shop[] = [];
-  constructor(private route: ActivatedRoute,
-    private bookService: BookService) {
+  constructor(private route: ActivatedRoute, protected router: Router,
+    private bookService: BookService, private appComponent: AppComponent) {
     this.id = this.route.snapshot.params.id;
     this.book = new Book();
   }
@@ -26,11 +27,11 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
     this.bookService.getOne(this.id).subscribe(data => {
       this.book = data;
-      // console.log(this.book);
+      console.log(this.book);
     })
     this.bookService.getPrice(this.id).subscribe(data => {
       this.price = data;
-      // console.log(this.price)
+      console.log(this.price)
     });
     this.bookService.getShop(this.id).subscribe(data => {
       this.shops = data;
@@ -42,6 +43,13 @@ export class BookComponent implements OnInit {
         });
       }
     })
-
+  }
+  onSubmit() {
+    if (this.appComponent.isClient()) {
+      this.router.navigate([`/cart`]);
+    }
+    else {
+      this.router.navigate([`/login`]);
+    }
   }
 }

@@ -33,7 +33,15 @@ export class AppComponent implements OnInit {
       this.username = user.username;
     }
   }
-
+  isAdmin() {
+    return this.showAdminBoard;
+  }
+  isOwner() {
+    return this.showOwnerBoard;
+  }
+  isClient() {
+    return this.showClientBoard;
+  }
   logout() {
     this.tokenStorageService.signOut();
     window.location.reload();

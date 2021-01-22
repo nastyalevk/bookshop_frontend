@@ -33,9 +33,11 @@
               <button type="submit" class="btn btn-primary btn-block"> Login </button>
             </div>
             <p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
-            <div class="alert alert-warning" *ngIf="f.submitted && !isLoggedIn">
-              Login failed!
-            </div><br />{{ errorMessage }}
+            <div *ngIf="!isLoggedIn && f.submitted">
+              <div class="alert alert-warning">
+                Login failed!
+              </div>
+            </div>
           </form>
           <div class="alert alert-success" *ngIf="isLoggedIn">
             Logged in as {{ roles }}.
