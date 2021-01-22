@@ -78,12 +78,6 @@ export class HomeComponent implements OnInit {
     this.retrieveBooks();
   }
 
-  refreshList(): void {
-    this.retrieveBooks();
-    this.currentBook = undefined;
-    this.currentIndex = -1;
-  }
-
   setActiveBook(book: Book, index: number): void {
     this.currentBook = book;
     this.currentIndex = index;
