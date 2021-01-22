@@ -6,7 +6,7 @@
 
 				<p class="price-detail-wrap">
 					<span class="price h3 text-warning">
-						<span class="currency">at least: </span><span class="num">{{price}} $</span>
+						<span class="currency">at least: $</span><span class="num">{{price}}</span>
 					</span>
 				</p>
 				<dl class="item-property">
@@ -34,8 +34,26 @@
 					<dt>Pages: </dt>
 					<dd>{{book.pages}}</dd>
 				</dl>
-				<button class="btn btn-primary btn-raised text-white"> <i class="fas fa-shopping-cart"></i> Add to cart
-				</button>
+				<dl class="item-property">
+					<dt>Shops: </dt>
+					<dd>
+						<table class="table table-hover">
+							<tbody>
+								<tr *ngFor="let shop of shops">
+									<td>{{ shop.id }}</td>
+									<td>{{ shop.shopName }}</td>
+									<td>{{ shop.country }}</td>
+									<td>{{ shop.city }}</td>
+									<td>{{ shop.address }}</td>
+									<td>${{ shop.price }}</td>
+									<td><button class="btn btn-primary btn-raised text-white"> <i
+												class="fas fa-shopping-cart"></i> Add to cart
+										</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</dd>
+				</dl>
 			</article>
 		</aside>
 	</div>
