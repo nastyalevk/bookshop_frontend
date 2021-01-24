@@ -11,9 +11,12 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(params: any): Observable<any> {
-    console.log(params);
-    return this.http.get<any>(bookUrl, { params });
+  getAll(searchTitle: string, page: number, pageSize: number, sort: string): Observable<any> {
+    let resultUrl;
+      resultUrl = bookUrl + `?bookName=${searchTitle}&page=${page}&size=${pageSize}&sort=${sort}`;
+      console.log(resultUrl);
+      return this.http.get<any>(bookUrl + `?bookName=${searchTitle}&page=${page}&size=${pageSize}&sort=${sort}`);
+
   }
 
   getOne(id: number): Observable<any> {
@@ -24,10 +27,10 @@ export class BookService {
     return this.http.get("http://localhost:8087/assortment/price/" + id);
   }
 
-  getShop(id: number): Observable<any>{
+  getShop(id: number): Observable<any> {
     return this.http.get("http://localhost:8087/shop/book/" + id);
   }
-  getShopPrice(bookId: number, shopId: number): Observable<any>{
+  getShopPrice(bookId: number, shopId: number): Observable<any> {
     console.log("oiuiyutvyrctexrwz")
     return this.http.get("http://localhost:8087/assortment/price/" + bookId + "/" + shopId);
   }

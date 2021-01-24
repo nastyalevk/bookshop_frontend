@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   currentBook?: Book;
   currentIndex = -1;
   bookName = '';
-  sort = "id_asc";
+  sort: string;
+  sorts :Map<String, String>;
 
   page = 1;
   count = 0;
@@ -22,38 +23,22 @@ export class HomeComponent implements OnInit {
   columnSort = 0;
 
   constructor(private bookService: BookService, protected router: Router) {
+    this.sort = "";
+    this.sorts = new Map([
+      // ["id", "asc"],
+      // ["bookName", "asc"],
+      // ["author", "asc"],
+      // ["genre", "asc"],
+      // ["publicationYear", "asc"]
+    ]);
   }
 
   ngOnInit(): void {
     this.retrieveBooks();
   }
 
-  getRequestParams(searchTitle: string, page: number, pageSize: number, sort: string): any {
-    let params: any = {};
-
-    if (searchTitle) {
-      params[`bookName`] = searchTitle;
-    }
-
-    if (page) {
-      params[`page`] = page - 1;
-    }
-
-    if (pageSize) {
-      params[`size`] = pageSize;
-    }
-
-    if (sort) {
-      params[`sort`] = sort;
-    }
-
-    return params;
-  }
   retrieveBooks(): void {
-    console.log(this.pageSize);
-    const params = this.getRequestParams(this.bookName, this.page, this.pageSize, this.sort);
-
-    this.bookService.getAll(params)
+    this.bookService.getAll(this.bookName, this.page, this.pageSize, this.sort)
       .subscribe(
         response => {
           const { content, totalElements } = response.body;
@@ -90,13 +75,18 @@ export class HomeComponent implements OnInit {
   sortTable(column: string) {
     console.log(column)
     if (this.columnSort) {
-      this.sort = column + "_asc";
+      this.sorts.set(column, "asc");
       this.columnSort = 0;
     }
     else {
-      this.sort = column + "_desc";
+      this.sorts.set(column, "desc");
       this.columnSort = 1;
     }
+    this.sort = '';
+    for(let [key, value] of this.sorts){
+      this.sort +="," +  key + "_"+ value;
+    }
+    this.sort = this.sort.slice(1, this.sort.length);
     console.log(this.sort)
     this.retrieveBooks();
   }
