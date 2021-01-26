@@ -42,7 +42,11 @@ import { CartComponent } from './component/cart/cart.component';
     NgxPaginationModule
   ],
   providers: [
-    authInterceptorProviders, BoardAdminComponent, HomeComponent
+    authInterceptorProviders, 
+    BoardAdminComponent, 
+    HomeComponent, 
+    CartComponent, 
+    BookComponent
   ],
   bootstrap: [AppComponent, BoardAdminComponent]
 })

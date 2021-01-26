@@ -1,1 +1,52 @@
-<p>cart works!</p>
+<div class="card-body">
+    <div class="container">
+        <h4 *ngIf="!items.length">No items in cart</h4>
+        <table *ngIf="items.length" class="table table-hover shopping-cart-wrap">
+            <thead class="text-muted">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col" width="120">Quantity</th>
+                    <th scope="col" width="120">Price</th>
+                    <th scope="col" width="200" class="text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="
+                let item of items">
+                    <td>
+                        <figure class="media">
+                            <figcaption class="media-body">
+                                <h6 class="title text-truncate">{{item.book.bookName}} </h6>
+                                <dl class="param param-inline small">
+                                    <dt>Author: </dt>
+                                    <dd>{{item.book.author}}</dd>
+                                </dl>
+                            </figcaption>
+                        </figure>
+                    </td>
+                    <td>
+                        <select [(ngModel)]="item.quantity" class="form-control"
+                            (change)="handleQuantityChange($event, item)">
+                            <option *ngFor="let quantity of bookQuantity" [ngValue]="quantity">
+                                {{ quantity }}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="price-wrap">
+                            <var class="price">USD {{item.shop.price}}</var>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <a (click)="remove(item)" class="btn btn-outline-danger"> × Remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary btn-raised text-white float-rihgt mt-3" *ngIf="items.length" (click)="order()">
+            Make an
+            order</button>
+
+
+    </div>
+</div>

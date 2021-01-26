@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../../model/book/book';
 import { BookService } from 'src/app/_services/book/book.service';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/_services/cart/cart.service';
+import { BookComponent } from '../book/book.component';
 
 @Component({
   selector: 'app-home',
@@ -22,15 +24,9 @@ export class HomeComponent implements OnInit {
   pageSizes = [9, 12, 15];
   columnSort = 0;
 
-  constructor(private bookService: BookService, protected router: Router) {
+  constructor(private bookService: BookService, protected router: Router, private cartService: CartService, private bookComponent: BookComponent) {
     this.sort = "";
-    this.sorts = new Map([
-      // ["id", "asc"],
-      // ["bookName", "asc"],
-      // ["author", "asc"],
-      // ["genre", "asc"],
-      // ["publicationYear", "asc"]
-    ]);
+    this.sorts = new Map([]);
   }
 
   ngOnInit(): void {
@@ -73,7 +69,7 @@ export class HomeComponent implements OnInit {
   }
 
   sortTable(column: string) {
-    console.log(column)
+    // console.log(column)
     if (this.columnSort) {
       this.sorts.set(column, "asc");
       this.columnSort = 0;
@@ -87,7 +83,7 @@ export class HomeComponent implements OnInit {
       this.sort +="," +  key + "_"+ value;
     }
     this.sort = this.sort.slice(1, this.sort.length);
-    console.log(this.sort)
+    // console.log(this.sort)
     this.retrieveBooks();
   }
 }

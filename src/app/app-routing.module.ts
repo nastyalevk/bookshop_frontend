@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'new', component: UserFormComponent },
   { path: 'book/:id', component: BookComponent },
   { path: 'cart', component: CartComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  // { path: '', redirectTo: 'home' }
 ];
 
 @NgModule({

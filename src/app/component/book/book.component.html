@@ -45,9 +45,13 @@
 									<td>{{ shop.city }}</td>
 									<td>{{ shop.address }}</td>
 									<td>${{ shop.price }}</td>
-									<td><button class="btn btn-primary btn-raised text-white" (click)="onSubmit()">
-											<i class="fas fa-shopping-cart"></i> Add to cart
-										</button></td>
+									<td>
+										<button class="btn btn-primary btn-raised text-white float-center mt-3" *ngIf="!inCart(shop.id)"
+										(click)="onSubmit(shop)"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+									<button *ngIf="inCart(shop.id)"
+										class="btn btn-primary btn-success btn-raised text-white float-center mt-3"
+										(click)="onSubmit(shop)"><i class="fas fa-shopping-cart"></i> already in cart</button>
+									</td>
 								</tr>
 							</tbody>
 						</table>

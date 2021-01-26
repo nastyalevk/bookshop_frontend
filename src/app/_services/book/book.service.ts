@@ -12,7 +12,10 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   getAll(searchTitle: string, page: number, pageSize: number, sort: string): Observable<any> {
-      return this.http.get<any>(bookUrl + `?bookName=${searchTitle}&page=${page}&size=${pageSize}&sort=${sort}`);
+    let resultUrl;
+      resultUrl = bookUrl + `?bookName=${searchTitle}&page=${page-1}&size=${pageSize}&sort=${sort}`;
+      console.log(resultUrl);
+      return this.http.get<any>(bookUrl + `?bookName=${searchTitle}&page=${page-1}&size=${pageSize}&sort=${sort}`);
 
   }
 
