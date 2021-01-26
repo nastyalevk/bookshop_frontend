@@ -13,7 +13,6 @@ export class UserFormComponent {
   user: User;
   roles: string[] = [];
   status = '';
-  rolesChange: string[] = [];
 
   constructor(
     private router: Router,
