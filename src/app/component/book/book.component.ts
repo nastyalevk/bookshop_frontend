@@ -26,7 +26,7 @@ export class BookComponent implements OnInit {
     private bookService: BookService, private appComponent: AppComponent,
     private cartService: CartService) {
     this.id = this.route.snapshot.params.id;
-    this.book = new Book();
+    // this.book = new Book();
     this.isCart = new Map<string, boolean>();
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/_services/user/user.service';
 import { AuthService } from '../../../_services/auth/auth.service';
 import { TokenStorageService } from '../../../_services/token/token-storage.service';
 
@@ -15,7 +16,9 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   token: string | undefined;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  // id: number;
+
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private userService: UserService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {

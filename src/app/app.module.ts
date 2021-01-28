@@ -19,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BookComponent } from './component/book/book.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderComponent } from './component/order/order.component';
+import { OrderSubmitComponent } from './component/order-submit/order-submit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { OrderComponent } from './component/order/order.component';
     UserFormComponent,
     BookComponent,
     CartComponent,
-    OrderComponent
+    OrderComponent,
+    OrderSubmitComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { UserFormComponent } from './component/user-form/user-form.component';
 import { BookComponent } from './component/book/book.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderComponent } from './component/order/order.component';
+import { OrderSubmitComponent } from './component/order-submit/order-submit.component';
 
 
 const routes: Routes = [
@@ -26,8 +27,9 @@ const routes: Routes = [
   { path: 'new', component: UserFormComponent },
   { path: 'book/:id', component: BookComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'order', component: OrderComponent }
-  // { path: '', redirectTo: 'home' }
+  { path: 'order', component: OrderComponent },
+  { path: 'order-info', component: OrderSubmitComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
