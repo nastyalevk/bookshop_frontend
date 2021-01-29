@@ -36,8 +36,7 @@ export class OrderComponent implements OnInit {
     this.items = this.cartService.toArray();
     this.order.cost = 0;
     this.orderContent = new OrderContent();
-    this.deliveryAddress = this.order.deliveryAddress;
-    this.description = this.order.description;
+   
   }
 
   ngOnInit(): void { }
@@ -45,7 +44,8 @@ export class OrderComponent implements OnInit {
   onSubmit() {
     let shops = this.cartService.getShopList();
     let orderAmound = this.cartService.getShopsAmound(shops);
-
+    this.deliveryAddress = this.order.deliveryAddress;
+    this.description = this.order.description;
     for (let i = 0; i < orderAmound; i++) {
       this.itemsInOrder = new Array<Cart>();
       this.setOrder(shops[i])
