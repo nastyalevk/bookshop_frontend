@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderContent } from 'src/app/model/orderContent/order-content';
@@ -13,19 +14,15 @@ import { UserService } from 'src/app/_services/user/user.service';
 })
 export class OrderSubmitComponent implements OnInit {
 
-  orderContents: OrderContent[];
 
   constructor(private route: ActivatedRoute,
     private router: Router, private cartService: CartService, private userService: UserService,
     private tokenStorage: TokenStorageService, private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.orderContents = this.orderService.saveOrderContent();
-    for (let orderContent of this.orderContents) {
-      this.orderService.saveOrderContentDb(orderContent).subscribe();
-    }
+    
   }
-  onSubmit(){
+  onSubmit() {
     this.router.navigate(['/home']);
   }
 }

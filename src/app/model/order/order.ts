@@ -1,4 +1,5 @@
 export class Order {
+    orderId: number;
     orderNumber : number;
     shopId : number;
     cost : number;
