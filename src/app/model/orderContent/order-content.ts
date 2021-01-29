@@ -1,6 +1,6 @@
 export class OrderContent {
-    orderId: number;
-    bookId: string;
-    quantity: number;
-    price: number;
+    orderId: number | undefined;
+    bookId: string | undefined;
+    quantity: number | undefined;
+    price: number | undefined;
 }

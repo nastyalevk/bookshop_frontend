@@ -21,6 +21,5 @@ export class OrderService {
 
   saveOrderContent(orderContent: OrderContent):Observable<OrderContent> {
     return this.http.post<OrderContent>(API_URL + 'order/content/create/', orderContent);
-
   }
 }

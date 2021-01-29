@@ -22,8 +22,8 @@ export class OrderComponent implements OnInit {
   today = new Date();
   itemsInOrder: Cart[] = [];
 
-  deliveryAddress: string;
-  description: string;
+  deliveryAddress : string | undefined;
+  description : string | undefined;
 
   dd = String(this.today.getDate()).padStart(2, '0');
   ddnew = String(this.today.getDate() + 1).padStart(2, '0');

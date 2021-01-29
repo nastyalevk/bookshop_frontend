@@ -49,9 +49,13 @@ export class BookComponent implements OnInit {
     })
   }
   onSubmit(shop: Shop) {
+    if(this.appComponent.isClient()){
     let key = "book_" + this.id.toString()+ "_" + shop.id;
     this.cartService.addToCart(new Cart(this.book, 1, shop));
-    this.isCart.set(key, true);
+    this.isCart.set(key, true);}
+    else{
+      this.router.navigate(['/login']);
+    }
   }
 
   inCart(shopId: number){
