@@ -14,8 +14,8 @@
                 </div>
                 <div class="form-group">
                     <label for="deliveryAddress">Delivery Address</label>
-                    <textarea [(ngModel)]="order.deliveryAddress" name="order.deliveryAddress" class="form-control"
-                        id="deliveryAddress" placeholder="not specified">{{order.deliveryAddress}}</textarea>
+                    <input [(ngModel)]="order.deliveryAddress" name="order.deliveryAddress" class="form-control"
+                        id="deliveryAddress" placeholder="{{order.deliveryAddress}}">
                 </div>
                 <div class="form-group">
                     <label for="orderSubmitDate">Order submit date</label>

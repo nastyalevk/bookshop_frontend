@@ -23,43 +23,43 @@
             <form #bookForm="ngForm">
                 <div class="form-group">
                     <label for="bookName">Book name</label>
-                    <textarea [(ngModel)]="book.bookName" name="bookName" class="form-control" id="bookName"
-                        placeholder="not specified">{{book.bookName}}</textarea>
+                    <input [(ngModel)]="book.bookName" name="bookName" class="form-control" id="bookName"
+                        placeholder="{{book.bookName}}">
                 </div>
                 <div class="form-group">
                     <label for="author">Author</label>
-                    <textarea [(ngModel)]="book.author" name="author" class="form-control" id="author"
-                        placeholder="not specified">{{book.author}}</textarea>
+                    <input [(ngModel)]="book.author" name="author" class="form-control" id="author"
+                        placeholder="{{book.author}}">
                 </div>
                 <div class="form-group">
                     <label for="genre">Genre</label>
-                    <textarea [(ngModel)]="book.genre" name="genre" class="form-control" id="genre"
-                        placeholder="not specified">{{book.genre}}</textarea>
+                    <input [(ngModel)]="book.genre" name="genre" class="form-control" id="genre"
+                        placeholder="{{book.genre}}">
                 </div>
                 <div class="form-group">
                     <label for="publicationYear">Publication year</label>
-                    <textarea [(ngModel)]="book.publicationYear" name="publicationYear" class="form-control"
-                        id="publicationYear" placeholder="not specified">{{book.publicationYear}}</textarea>
+                    <input [(ngModel)]="book.publicationYear" name="publicationYear" class="form-control"
+                        id="publicationYear" placeholder="{{book.publicationYear}}">
                 </div>
                 <div class="form-group">
                     <label for="pages">Pages</label>
-                    <textarea [(ngModel)]="book.pages" name="pages" class="form-control" id="pages"
-                        placeholder="not specified">{{book.pages}}</textarea>
+                    <input [(ngModel)]="book.pages" name="pages" class="form-control" id="pages"
+                        placeholder="{{book.pages}}">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea [(ngModel)]="book.description" name="description" class="form-control" id="description"
-                        placeholder="not specified">{{book.description}}</textarea>
+                        placeholder="">{{book.description}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <textarea [(ngModel)]="assortment.quantity" name="quantity" class="form-control" id="quantity"
-                        placeholder="not specified">{{assortment.quantity}}</textarea>
+                    <input [(ngModel)]="assortment.quantity" name="quantity" class="form-control" id="quantity"
+                        placeholder="{{assortment.quantity}}">
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <textarea [(ngModel)]="assortment.price" name="price" class="form-control" id="price"
-                        placeholder="not specified">{{assortment.price}}</textarea>
+                    <input [(ngModel)]="assortment.price" name="price" class="form-control" id="price"
+                        placeholder="{{assortment.price}}">
                 </div>
                 <button type="submit" class="btn btn-info" (click)="onSubmitBook()">Save</button>
             </form>
