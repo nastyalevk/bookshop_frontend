@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Book } from 'src/app/model/book/book';
 
 const bookUrl = 'http://localhost:8087/book/';
 
@@ -27,8 +28,19 @@ export class BookService {
   getShop(id: number): Observable<any> {
     return this.http.get("http://localhost:8087/shop/book/" + id);
   }
+  
   getShopPrice(bookId: number, shopId: number): Observable<any> {
     console.log("oiuiyutvyrctexrwz")
     return this.http.get("http://localhost:8087/assortment/price/" + bookId + "/" + shopId);
   }
+
+  saveBook(book: Book):Observable<Book> {
+    return this.http.post<Book>(bookUrl + 'create/', book);
+  }
+
+  getBooksByShop(shopId: number): Observable<any> {
+    return this.http.get<any>(bookUrl+"shop/" +shopId);
+
+}
+
 }

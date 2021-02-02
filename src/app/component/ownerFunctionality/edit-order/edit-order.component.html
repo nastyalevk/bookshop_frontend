@@ -1,0 +1,62 @@
+<div class="card-body">
+    <div class="container">
+        <aside class="col-sm-6">
+            <form #shopForm="ngForm">
+                <div class="form-group">
+                    <label for="id">Order ID</label>
+                    <input disabled [(ngModel)]="order.orderId" name="oeder.orderId" class="form-control"
+                        id="orderId" placeholder="{{order.orderId}}">
+                </div>
+                <div class="form-group">
+                    <label for="shopName">Order number</label>
+                    <input disabled [(ngModel)]="order.orderNumber" name="{{order.orderNumber}}" class="form-control"
+                        id="orderNumber" placeholder="not specified">
+                </div>
+                <div class="form-group">
+                    <label for="deliveryAddress">Delivery Address</label>
+                    <textarea [(ngModel)]="order.deliveryAddress" name="order.deliveryAddress" class="form-control"
+                        id="deliveryAddress" placeholder="not specified">{{order.deliveryAddress}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="orderSubmitDate">Order submit date</label>
+                    <input disabled [(ngModel)]="order.orderSubmitDate" name="order.orderSubmitDate"
+                        class="form-control" id="orderSubmitDate"
+                        placeholder="{{order.orderSubmitDate}}">
+                </div>
+                <div class="form-group">
+                    <label for="classificationStatus">Status</label>
+                    <input disabled [(ngModel)]="order.classificationStatus" name="order.classificationStatus"
+                        class="form-control" id="classificationStatus"
+                        placeholder="{{order.classificationStatus}}">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input disabled [(ngModel)]="order.username" name="order.username" class="form-control"
+                        id="username" placeholder="{{order.username}}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea [(ngModel)]="order.description" name="order.description" class="form-control"
+                        id="description" placeholder="not specified">{{order.description}}</textarea>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="{{order.orderCompleteDate}}" name="orderCompleteDate"
+                            [(ngModel)]="order.orderCompleteDate" ngbDatepicker #d="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+                                    class="fa fa-calendar" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info float-left" (click)="saveOrder()">Save</button>
+                    <button type="submit" class="btn btn-danger float-right" (click)="deleteOrder()"><i
+                            class="fa fa-trash" aria-hidden="true"></i>Delete</button>
+                </div>
+            </form>
+
+        </aside>
+        <aside class="col-sm-6"></aside>
+    </div>
+</div>

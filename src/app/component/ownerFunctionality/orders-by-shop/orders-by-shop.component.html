@@ -1,0 +1,48 @@
+<div class="card-body">
+    <div class="container">
+        <div class="form-group">
+            <ul class="nav nav-fill nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active bg-secondary" (click)="getAllOrders()">All
+                        orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  bg-secondary" (click)="editShop()">Edit shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  bg-secondary" (click)="addNewBook()">Add new book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  bg-secondary" (click)="addBook()">Add existent book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  bg-secondary" (click)="shopAssortment()">Shop assortment</a>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th  scope="col">Number</th>
+                        <th scope="col">Order submit date</th>
+                        <th scope="col">Order complete date</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td (click) = "goToOrder(order.orderId)">{{ order.orderId }}</td>
+                        <td (click) = "goToOrder(order.orderId)">{{ order.orderNumber }}</td>
+                        <td>{{ order.orderSubmitDate }}</td>
+                        <td>{{ order.orderCompleteDate }}</td>
+                        <td>{{ order.cost }}</td>
+                        <td>{{ order.username }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

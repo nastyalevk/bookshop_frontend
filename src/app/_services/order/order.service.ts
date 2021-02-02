@@ -16,10 +16,24 @@ export class OrderService {
   constructor(private http: HttpClient) { 
   }
   saveOrder(order: Order):Observable<Order> {
-    return this.http.post<Order>(API_URL + 'order/create/', order);
+    return this.http.post<Order>(API_URL + 'order/create', order);
   }
 
   saveOrderContent(orderContent: OrderContent):Observable<OrderContent> {
     return this.http.post<OrderContent>(API_URL + 'order/content/create/', orderContent);
+  }
+
+  
+  getOrderByShop(id: number): Observable<any> {
+    return this.http.get(API_URL + "order/shop/" + id);
+  }
+
+  getOne(id: number):Observable<Order> {
+    return this.http.get<Order>(API_URL + 'order/'+id);
+  }
+
+  
+  getOrderContent(orderId: number):Observable<any> {
+    return this.http.get<any>(API_URL + 'order/content/'+orderId);
   }
 }

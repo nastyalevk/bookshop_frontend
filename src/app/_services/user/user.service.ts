@@ -44,7 +44,7 @@ export class UserService {
     return this.http.get<any>(API_URL + 'user/update-roles/', { params });
   }
 
-  getUserByUsername(username: string): Observable<number> {
-    return this.http.get<number>(API_URL + 'user/username/' + username);
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>('http://localhost:8087/user/find/username/' + username);
   }
 }

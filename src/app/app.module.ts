@@ -9,7 +9,7 @@ import { RegisterComponent } from './component/auth/register/register.component'
 import { HomeComponent } from './component/home/home.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { BoardAdminComponent } from './component/board/board-admin/board-admin.component';
-import { BoardOwnerComponent } from './component/board/board-owner/board-owner.component';
+import { BoardOwnerComponent } from './component/ownerFunctionality/board-owner/board-owner.component';
 import { BoardClientComponent } from './component/board/board-client/board-client.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { AgGridModule } from 'ag-grid-angular';
@@ -20,6 +20,16 @@ import { BookComponent } from './component/book/book.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderComponent } from './component/order/order.component';
 import { OrderSubmitComponent } from './component/order-submit/order-submit.component';
+import { OrdersByShopComponent } from './component/ownerFunctionality/orders-by-shop/orders-by-shop.component';
+import { EditShopComponent } from './component/ownerFunctionality/edit-shop/edit-shop.component';
+import { NewBookComponent } from './component/ownerFunctionality/new-book/new-book.component';
+import { AllBooksOwnerComponent } from './component/ownerFunctionality/all-books-owner/all-books-owner.component';
+import { AddExistentBookInShopComponent } from './component/ownerFunctionality/add-existent-book-in-shop/add-existent-book-in-shop.component';
+import { ShopAssortmentComponent } from './component/ownerFunctionality/shop-assortment/shop-assortment.component';
+import { BookPersonalPageInShopComponent } from './component/ownerFunctionality/book-personal-page-in-shop/book-personal-page-in-shop.component';
+import { CreateNewShopComponent } from './component/ownerFunctionality/create-new-shop/create-new-shop.component';
+import { EditOrderComponent } from './component/ownerFunctionality/edit-order/edit-order.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +45,16 @@ import { OrderSubmitComponent } from './component/order-submit/order-submit.comp
     BookComponent,
     CartComponent,
     OrderComponent,
-    OrderSubmitComponent
+    OrderSubmitComponent,
+    OrdersByShopComponent,
+    EditShopComponent,
+    NewBookComponent,
+    AllBooksOwnerComponent,
+    AddExistentBookInShopComponent,
+    ShopAssortmentComponent,
+    BookPersonalPageInShopComponent,
+    CreateNewShopComponent,
+    EditOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +62,7 @@ import { OrderSubmitComponent } from './component/order-submit/order-submit.comp
     HttpClientModule,
     FormsModule,
     AgGridModule.withComponents([]), 
-    NgxPaginationModule
+    NgxPaginationModule, NgbModule
   ],
   providers: [
     authInterceptorProviders, 

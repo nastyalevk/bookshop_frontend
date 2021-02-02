@@ -86,7 +86,7 @@ export class OrderComponent implements OnInit {
     this.order.cost = 0;
     this.order.classificationId = 10;
     this.order.classificationStatus = 'open';
-    this.order.orderSubmitDate = this.mm + '/' + this.dd + '/' + this.yyyy;;
+    this.order.orderSubmitDate = this.mm + '/' + this.dd + '/' + this.yyyy;
     this.order.shopId = shop.id;
     this.order.orderCompleteDate = this.mm + '/' + this.ddnew + '/' + this.yyyy;
     this.order.username = this.tokenStorage.getUser().username;
