@@ -35,7 +35,7 @@ export class CartService {
   toArray(): Cart[] {
     return Array.from(this.items.values());
   }
-  
+
   remove(item: Cart) {
     let key = "book_" + item.book.id.toString() + "_" + item.shop.id;
     this.items.delete(key);

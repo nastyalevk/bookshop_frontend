@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Cart } from 'src/app/model/cart/cart';
 import { Order } from 'src/app/model/order/order';
 import { OrderContent } from 'src/app/model/orderContent/order-content';
@@ -7,7 +7,6 @@ import { Shop } from 'src/app/model/shop/shop';
 import { CartService } from 'src/app/_services/cart/cart.service';
 import { OrderService } from 'src/app/_services/order/order.service';
 import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
-import { UserService } from 'src/app/_services/user/user.service';
 
 @Component({
   selector: 'app-order',
@@ -30,13 +29,11 @@ export class OrderComponent implements OnInit {
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
   yyyy = this.today.getFullYear();
 
-  constructor(private route: ActivatedRoute,
-    private router: Router, private cartService: CartService, private userService: UserService,
+  constructor(private router: Router, private cartService: CartService,
     private tokenStorage: TokenStorageService, private orderService: OrderService) {
     this.items = this.cartService.toArray();
     this.order.cost = 0;
     this.orderContent = new OrderContent();
-   
   }
 
   ngOnInit(): void { }
@@ -91,7 +88,6 @@ export class OrderComponent implements OnInit {
     this.order.orderCompleteDate = this.mm + '/' + this.ddnew + '/' + this.yyyy;
     this.order.username = this.tokenStorage.getUser().username;
     this.order.orderNumber = Math.random() * 10000;
-
   }
 
 }

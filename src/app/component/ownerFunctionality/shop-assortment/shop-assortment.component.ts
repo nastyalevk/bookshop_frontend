@@ -13,6 +13,12 @@ export class ShopAssortmentComponent implements OnInit {
 
   id: number;
   books: Book[] = [];
+  currentBook?: Book;
+  currentIndex = -1;
+  page = 1;
+  count = 0;
+  pageSize = 9;
+  pageSizes = [8, 12, 16];
   constructor(private route: ActivatedRoute, protected router: Router, private bookService: BookService, private assortmentService: AssortmentService) {
     this.id = this.route.snapshot.params.id;
   }
@@ -36,16 +42,34 @@ export class ShopAssortmentComponent implements OnInit {
   addBook() {
     this.router.navigate([`/shop/addBooks/${this.id}`]);
   }
-
   shopAssortment() {
-    this.bookService.getBooksByShop(this.id).subscribe(
-      data => {
-        this.books = data;
-      }
-    );
+    this.bookService.getBooksByShop(this.page, this.pageSize, this.id).subscribe(
+      response => {
+        const { content, totalElements } = response.body;
+
+        this.books = content;
+        this.count = totalElements;
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
   }
   goToBookPersonalPage(bookId: number) {
     this.router.navigate([`/shop/${this.id}/book/${bookId}`]);
   }
+  setActiveBook(book: Book, index: number): void {
+    this.currentBook = book;
+    this.currentIndex = index;
+  }
+  handlePageSizeChange(event: any): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.shopAssortment();
+  }
 
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.shopAssortment();
+  }
 }

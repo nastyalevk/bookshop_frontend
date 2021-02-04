@@ -10,7 +10,7 @@ import { HomeComponent } from './component/home/home.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { BoardAdminComponent } from './component/board/board-admin/board-admin.component';
 import { BoardOwnerComponent } from './component/ownerFunctionality/board-owner/board-owner.component';
-import { BoardClientComponent } from './component/board/board-client/board-client.component';
+// import { BoardClientComponent } from './component/board/board-client/board-client.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { AgGridModule } from 'ag-grid-angular';
 import { UserComponent } from './component/user/user.component';
@@ -30,6 +30,9 @@ import { BookPersonalPageInShopComponent } from './component/ownerFunctionality/
 import { CreateNewShopComponent } from './component/ownerFunctionality/create-new-shop/create-new-shop.component';
 import { EditOrderComponent } from './component/ownerFunctionality/edit-order/edit-order.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ShopPersonalPageComponent } from './component/shop-personal-page/shop-personal-page.component';
+import { ShopReviewComponent } from './component/shop-review/shop-review.component';
+import { BoardClientComponent } from './component/board-client/board-client.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,22 +57,28 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ShopAssortmentComponent,
     BookPersonalPageInShopComponent,
     CreateNewShopComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    ShopPersonalPageComponent,
+    ShopReviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    AgGridModule.withComponents([]), 
-    NgxPaginationModule, NgbModule
+    AgGridModule.withComponents([]),
+    NgxPaginationModule, 
+    NgbModule
   ],
   providers: [
-    authInterceptorProviders, 
-    BoardAdminComponent, 
-    HomeComponent, 
-    CartComponent, 
-    BookComponent
+    authInterceptorProviders,
+    BoardAdminComponent,
+    HomeComponent,
+    CartComponent,
+    BoardClientComponent,
+    AddExistentBookInShopComponent,
+    BookComponent,
+    AllBooksOwnerComponent
   ],
   bootstrap: [AppComponent, BoardAdminComponent]
 })

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Book } from '../../model/book/book';
 import { User } from 'src/app/model/user/user';
 
-const API_URL = 'http://localhost:8087/';
+const Url = 'http://localhost:8087/';
 
 @Injectable({
   providedIn: 'root'
@@ -16,32 +16,32 @@ export class UserService {
    }
 
   getPublicContent(): Observable<any> {
-    return this.http.get<Book[]>(API_URL + 'book');
+    return this.http.get<Book[]>(Url + 'book');
   }
 
   getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'client', { responseType: 'text' });
+    return this.http.get(Url + 'client', { responseType: 'text' });
   }
 
   getOwnerBoard(): Observable<any> {
-    return this.http.get(API_URL + 'own', { responseType: 'text' });
+    return this.http.get(Url + 'own', { responseType: 'text' });
   }
 
   findAll(): Observable<User[]> {
-    const users = this.http.get<User[]>(API_URL + 'user');
+    const users = this.http.get<User[]>(Url + 'user');
     return users;
   }
-  getOne(id: number): Observable<any> {
-    return this.http.get(API_URL + 'user/' + id);
+  getOne(id: number): Observable<User> {
+    return this.http.get<User>(Url + 'user/' + id);
   }
 
   save(user: User) {
     console.log(user);
-    return this.http.post<User>(API_URL + 'user/create/', user);
+    return this.http.post<User>(Url + 'user/create/', user);
   }
 
   updateRoles(params: any) {
-    return this.http.get<any>(API_URL + 'user/update-roles/', { params });
+    return this.http.get<any>(Url + 'user/update-roles/', { params });
   }
 
   getUserByUsername(username: string): Observable<User> {

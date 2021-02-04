@@ -28,6 +28,7 @@ export class AllBooksOwnerComponent implements OnInit {
   isInShop: boolean;
   assortment: Assortment
   value: boolean;
+  
   constructor(private route: ActivatedRoute, protected router: Router, private bookService: BookService,
     private assortmentService: AssortmentService) {
     this.id = this.route.snapshot.params.id;
@@ -93,7 +94,6 @@ export class AllBooksOwnerComponent implements OnInit {
   }
 
   sortTable(column: string) {
-    // console.log(column)
     if (this.sorts.has(column)) {
       this.sorts.delete(column);
       this.sorts.set(column, "asc");
@@ -106,7 +106,6 @@ export class AllBooksOwnerComponent implements OnInit {
       this.sort += "," + key + "_" + value;
     }
     this.sort = this.sort.slice(1, this.sort.length);
-    // console.log(this.sort)
     this.retrieveBooks();
   }
 

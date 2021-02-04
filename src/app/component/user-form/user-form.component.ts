@@ -14,8 +14,7 @@ export class UserFormComponent {
   roles: string[] = [];
   status = '';
 
-  constructor(
-    private router: Router,
+  constructor(private router: Router,
     private userService: UserService) {
     this.user = new User();
     this.user.activated = true;
@@ -73,7 +72,7 @@ export class UserFormComponent {
       console.log(this.roles);
     }
   }
-  
+
   rolesToEntity() {
     let rolesEntity = new Array<Role>();
     for (let i of this.roles) {
@@ -92,7 +91,6 @@ export class UserFormComponent {
     }
     return rolesEntity;
   }
-
 
   changeRoleStatus(roleName: string, state: boolean) {
     if (state) {

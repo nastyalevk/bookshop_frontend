@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Shop } from 'src/app/model/shop/shop';
 import { User } from 'src/app/model/user/user';
 import { ShopService } from 'src/app/_services/shop/shop.service';
@@ -21,14 +21,13 @@ export class CreateNewShopComponent implements OnInit {
   dd = String(this.today.getDate()).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
   yyyy = this.today.getFullYear();
-  constructor(private route: ActivatedRoute, protected router: Router,
-    private shopService: ShopService, private userService: UserService, private tokenStorage: TokenStorageService) {
+  constructor(protected router: Router, private shopService: ShopService,
+    private userService: UserService, private tokenStorage: TokenStorageService) {
     this.shop = new Shop();
   }
 
   ngOnInit(): void {
   }
-
 
   onSubmitShop() {
     this.user = this.tokenStorage.getUser();
@@ -39,7 +38,6 @@ export class CreateNewShopComponent implements OnInit {
         this.shopService.saveShop(this.shop).subscribe();
         this.router.navigate(['/owner']);
       });
-
   }
 
 }

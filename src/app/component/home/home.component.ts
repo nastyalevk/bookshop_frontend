@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../../model/book/book';
 import { BookService } from 'src/app/_services/book/book.service';
 import { Router } from '@angular/router';
-import { CartService } from 'src/app/_services/cart/cart.service';
-import { BookComponent } from '../book/book.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
   books: Book[] = [];
   currentBook?: Book;
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit {
   pageSize = 9;
   pageSizes = [9, 12, 15];
 
-  constructor(private bookService: BookService, protected router: Router, private cartService: CartService, private bookComponent: BookComponent) {
+  constructor(private bookService: BookService, protected router: Router) {
     this.sort = "";
     this.sorts = new Map([]);
   }
@@ -68,7 +67,6 @@ export class HomeComponent implements OnInit {
   }
 
   sortTable(column: string) {
-    // console.log(column)
     if (this.sorts.has(column)) {
       this.sorts.delete(column);
       this.sorts.set(column, "asc");
@@ -81,7 +79,6 @@ export class HomeComponent implements OnInit {
       this.sort +="," +  key + "_"+ value;
     }
     this.sort = this.sort.slice(1, this.sort.length);
-    // console.log(this.sort)
     this.retrieveBooks();
   }
 }
