@@ -4,11 +4,16 @@
 			<article class="card-body p-5">
 				<h3 class="title mb-3">{{book.bookName}}</h3>
 
-				<p class="price-detail-wrap">
+				<p *ngIf="isAvaliable" class="price-detail-wrap">
 					<span class="price h3 text-warning">
 						<span class="currency">at least: $</span><span class="num">{{price}}</span>
 					</span>
 				</p>
+
+				<dl *ngIf="!isAvaliable">
+					<h3 class="title mb-3 text-danger">This book is not avaliable</h3>
+				</dl>
+
 				<dl class="item-property">
 					<dt>Author: </dt>
 					<dd>
@@ -34,31 +39,43 @@
 					<dt>Pages: </dt>
 					<dd>{{book.pages}}</dd>
 				</dl>
-				<dl class="item-property">
+				<dl *ngIf="isAvaliable" class="item-property">
 					<dt>Shops: </dt>
 					<table class="table table-hover table-responsive">
 						<tbody>
-							<tr *ngFor="let shop of shops">
+							<tr *ngFor="let shop of shops;  let i = index">
 								<td>{{ shop.id }}</td>
 								<td (click)="goToShop(shop.id)">{{ shop.shopName }}</td>
 								<td>{{ shop.country }}</td>
 								<td>{{ shop.city }}</td>
 								<td>{{ shop.address }}</td>
-								<td>${{ shop.price }}</td>
+								<td>${{ assortments[i].price }}</td>
 								<td>
-									<button class="btn btn-primary btn-raised text-white float-center mt-3"
-										*ngIf="!inCart(shop.id)" (click)="onSubmit(shop)"><i
-											class="fas fa-shopping-cart"></i> Add to cart</button>
-									<button *ngIf="inCart(shop.id)"
-										class="btn btn-primary btn-success btn-raised text-white float-center mt-3"
-										(click)="onSubmit(shop)"><i class="fas fa-shopping-cart"></i> already in
-										cart</button>
+									<h6>Availability: </h6>{{ assortments[i].classification}}
+								</td>
+								<td>
+									<div *ngIf="isOpen(assortments[i].classification)">
+										<button class="btn btn-primary btn-raised text-white float-center mt-3"
+											*ngIf="!inCart(shop.id)" (click)="onSubmit(assortments[i])"><i
+												class="fas fa-shopping-cart"></i> Add to cart</button>
+										<button *ngIf="inCart(shop.id)"
+											class="btn btn-primary btn-success btn-raised text-white float-center mt-3"
+											(click)="onSubmit(assortments[i])"><i class="fas fa-shopping-cart"></i>
+											already in
+											cart</button>
+									</div>
+									<div *ngIf="!isOpen(assortments[i].classification)">
+										<button disabled
+											class="btn btn-primary btn-raised text-white float-center mt-3"><i
+												class="fas fa-shopping-cart"></i> Add to cart</button>
+									</div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</dl>
-				<form>
+
+				<form *ngIf="isClient">
 					<div class="form-group">
 						<label for="comment">Your Comment</label>
 						<textarea name="comment" [(ngModel)]="review.comment" id="comment" class="form-control"
@@ -71,21 +88,19 @@
 					</pre>
 				</form>
 				<div *ngIf="reviews.length">
-					<hr>
-					<div class="container">
+					<div *ngFor="let review of reviews; let i = index">
 						<div class="row">
-							<div class="media">
-								<div class="media-body">
-									<div *ngFor="let review of reviews; let i = index">
-										<h6 class="media-heading title">{{review.username}}</h6>
-										<ngb-rating [(rate)]="review.rating"></ngb-rating>
-										<p>
-											{{review.comment}}<br>
-										</p>
-									</div>
-								</div>
+							<div class="col">
+								<h6 class="media-heading title">{{review.username}}</h6>
+							</div>
+							<div class="col">
+								<p><small>{{review.datetime}}</small></p>
 							</div>
 						</div>
+						<ngb-rating [(rate)]="review.rating"></ngb-rating>
+						<p>
+							{{review.comment}}<br>
+						</p>
 					</div>
 				</div>
 				<div *ngIf="!reviews.length">

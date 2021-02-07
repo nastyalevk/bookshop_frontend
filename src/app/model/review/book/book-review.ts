@@ -1,7 +1,8 @@
 export class BookReview {
-    id: number;
-    username: string;
-    comment: string;
-    rating: number;
-    bookId: number;
+    id: number | undefined;
+    username: string | undefined;
+    comment: string | undefined;
+    rating: number | undefined;
+    bookId: number | undefined;
+    datetime: string | undefined;
 }

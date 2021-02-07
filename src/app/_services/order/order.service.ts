@@ -13,30 +13,42 @@ const Url = 'http://localhost:8087/order';
 
 export class OrderService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
-  saveOrder(order: Order):Observable<Order> {
+  saveOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(Url + '/create', order);
   }
 
-  saveOrderContent(orderContent: OrderContent):Observable<OrderContent> {
+  saveOrderContent(orderContent: OrderContent): Observable<OrderContent> {
     return this.http.post<OrderContent>(Url + '/content/create/', orderContent);
   }
 
-  
-  getOrderByShop(id: number): Observable<any> {
-    return this.http.get(Url + "/shop/" + id);
+  updateOrderContent(orderContent: OrderContent): Observable<OrderContent> {
+    return this.http.post<OrderContent>(Url + '/content/update/', orderContent);
   }
 
-  getOne(id: number):Observable<Order> {
-    return this.http.get<Order>(Url + '/'+id);
+  deleteOrderContent(orderContent: OrderContent) {
+    return this.http.post(Url + '/content/delete/', orderContent);
   }
 
-  
-  getOrderContent(orderId: number):Observable<any> {
-    return this.http.get<any>(Url + '/content/'+orderId);
+  getOrderByShop(page: number, pageSize: number, shopId: number): Observable<any> {
+    return this.http.get(Url + `/shop/?page=${page - 1}&size=${pageSize}&shopId=${shopId}`);
   }
-  getOrderByUser(page: number, pageSize: number):Observable<any>{
-    return this.http.get<any>(Url + `/client/?page=${page-1}&size=${pageSize}`);
+
+  getOne(id: number): Observable<Order> {
+    return this.http.get<Order>(Url + '/' + id);
+  }
+
+
+  getOrderContents(orderId: number): Observable<any> {
+    return this.http.get<any>(Url + '/content/' + orderId);
+  }
+
+  getOrderContent(orderId: number, bookId: number): Observable<OrderContent> {
+    return this.http.get<OrderContent>(Url + '/content/' + orderId + "/" + bookId);
+  }
+
+  getOrderByUser(page: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(Url + `/client/?page=${page - 1}&size=${pageSize}`);
   }
 }

@@ -15,6 +15,7 @@ export class NewBookComponent implements OnInit {
   book = new Book();
   id: number;
   assortment = new Assortment();
+  classifications=["open", "active", "waiting", "closed"];
 
   bookId:number;
   today = new Date();
@@ -45,16 +46,15 @@ export class NewBookComponent implements OnInit {
   }
 
   onSubmitBook() {
+    console.log(this.book);
     this.bookService.saveBook(this.book).subscribe(data => {
       this.assortment.bookId = data.id;
       this.assortment.shopId = this.id;
       this.assortment.creationDate = this.mm + '/' + this.dd + '/' + this.yyyy;
-      this.assortment.classificationId = 5;
-      this.assortment.classificationStatus = "open";
+      console.log(this.assortment);
       this.assortmentService.saveAssortment(this.assortment).subscribe();
     });
     window.location.reload();
-
 
   }
 }

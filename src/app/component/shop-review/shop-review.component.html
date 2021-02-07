@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="col">
-                <form>
+                <form *ngIf="isClient">
                     <div class="form-group">
                         <label for="comment">Your Comment</label>
                         <textarea name="comment" [(ngModel)]="review.comment" id="comment" class="form-control"
@@ -29,21 +29,19 @@
 					</pre>
                 </form>
                 <div *ngIf="reviews.length">
-                    <hr>
-                    <div class="container">
+                    <div *ngFor="let review of reviews; let i = index">
                         <div class="row">
-                            <div class="media">
-                                <div class="media-body">
-                                    <div *ngFor="let review of reviews; let i = index">
-                                        <h6 class="media-heading title">{{review.username}}</h6>
-                                        <ngb-rating [(rate)]="review.rating"></ngb-rating>
-                                        <p>
-                                            {{review.comment}}<br>
-                                        </p>
-                                    </div>
-                                </div>
+                            <div class="col">
+                                <h6 class="media-heading title">{{review.username}}</h6>
+                            </div>
+                            <div class="col">
+                                <p><small>{{review.datetime}}</small></p>
                             </div>
                         </div>
+                        <ngb-rating [(rate)]="review.rating"></ngb-rating>
+                        <p>
+                            {{review.comment}}<br>
+                        </p>
                     </div>
                 </div>
                 <div *ngIf="!reviews.length">

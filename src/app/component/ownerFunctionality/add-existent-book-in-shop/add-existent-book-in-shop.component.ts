@@ -17,6 +17,7 @@ export class AddExistentBookInShopComponent implements OnInit {
   shopId: number;
   book: Book;
   today = new Date();
+  classifications=["open", "active", "waiting", "closed"];
 
   dd = String(this.today.getDate()).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
@@ -38,7 +39,6 @@ export class AddExistentBookInShopComponent implements OnInit {
   onSubmitBook(){
     this.assortment.bookId = this.bookId.toString();
     this.assortment.shopId = this.shopId;
-    this.assortment.classificationId = 5;
     this.assortment.creationDate = this.mm + '/' + this.dd + '/' + this.yyyy;
     this.assortmentService.saveAssortment(this.assortment).subscribe(data=>{
       this.assortment = this.assortment;

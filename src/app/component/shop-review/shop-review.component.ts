@@ -16,25 +16,37 @@ export class ShopReviewComponent implements OnInit {
   shop: Shop;
   isClient = false;
   private roles: string[] = [];
-
-  reviews: ShopReview[]=[];
+  isLoggedIn = false;
+  reviews: ShopReview[] = [];
   review: ShopReview;
+
+  today = new Date();
+  dd = String(this.today.getDate()).padStart(2, '0');
+  mm = String(this.today.getMonth() + 1).padStart(2, '0');
+  yyyy = String(this.today.getFullYear());
+  hh = String(this.today.getHours());
+  MM = String(this.today.getMinutes());
+  ss = String(this.today.getSeconds());
+
   constructor(private route: ActivatedRoute, protected router: Router, private reviewService: ReviewService,
     private shopService: ShopService, private tokenStorageService: TokenStorageService) {
-      this.shopId = this.route.snapshot.params.shopId;
-      this.shop = new Shop();
-      this.roles = this.tokenStorageService.getUser().roles;
+    this.shopId = this.route.snapshot.params.shopId;
+    this.shop = new Shop();
+    this.roles = this.tokenStorageService.getUser().roles;
+    this.review = new ShopReview();
+    this.review.rating = 0;
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
       this.isClient = this.roles.includes('ROLE_CLIENT');
-      this.review = new ShopReview();
-      this.review.rating = 0;
     }
+  }
 
   ngOnInit(): void {
     this.shopService.getShop(this.shopId).subscribe(data => {
       console.log(this.shop);
       this.shop = data;
     });
-    this.reviewService.getShopReview(this.shopId).subscribe(data=>{
+    this.reviewService.getShopReview(this.shopId).subscribe(data => {
       this.reviews = data;
     });
   }
@@ -45,9 +57,10 @@ export class ShopReviewComponent implements OnInit {
   goToShopAssortment() {
     this.router.navigate([`/shop/page/${this.shopId}/`]);
   }
-  saveComment(){
+  saveComment() {
     this.review.shopId = this.shopId;
-    console.log(this.review)
+    this.review.datetime = this.yyyy+"-"+this.mm+"-"+this.dd+" "+this.hh+":"+this.MM+":"+this.ss;
+    console.log(this.review);
     this.reviewService.saveShopReview(this.review).subscribe();
     window.location.reload();
   }

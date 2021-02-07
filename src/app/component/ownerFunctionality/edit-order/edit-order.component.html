@@ -5,28 +5,32 @@
                 <form #orderForm="ngForm">
                     <div class="form-group">
                         <label for="orderId">Order ID</label>
-                        <input disabled 
-                        [(ngModel)]="order.orderId" 
-                        name="orderId" 
-                        class="form-control"
-                        id="orderId"
-                        placeholder="{{order.orderId}}" >
+                        <input disabled [(ngModel)]="order.orderId" name="orderId" class="form-control" id="orderId"
+                            placeholder="{{order.orderId}}">
                     </div>
                     <div class="form-group">
                         <label for="shopName">Order number</label>
-                        <input disabled [(ngModel)]="order.orderNumber" name="orderNumber"
-                            class="form-control" id="orderNumber" placeholder="not specified">
+                        <input disabled [(ngModel)]="order.orderNumber" name="orderNumber" class="form-control"
+                            id="orderNumber" placeholder="not specified">
                     </div>
                     <div class="form-group">
                         <label for="deliveryAddress">Delivery Address</label>
-                        <input [(ngModel)]="order.deliveryAddress" name="deliveryAddress" class="form-control"
+                        <input disabled [(ngModel)]="order.deliveryAddress" name="deliveryAddress" class="form-control"
                             id="deliveryAddress" placeholder="{{order.deliveryAddress}}">
                     </div>
 
                     <label for="orderSubmitDate">Order submit/complete date</label>
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="isClient">
                         <div class="input-group">
-
+                            <input disabled [(ngModel)]="order.orderSubmitDate" name="orderSubmitDate"
+                                class="form-control input-sm" id="orderSubmitDate"
+                                placeholder="{{order.orderSubmitDate}}">
+                            <input disabled class="form-control input-sm" placeholder="{{order.orderCompleteDate}}"
+                                name="orderCompleteDate">
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="isOwner">
+                        <div class="input-group">
                             <input disabled [(ngModel)]="order.orderSubmitDate" name="orderSubmitDate"
                                 class="form-control input-sm" id="orderSubmitDate"
                                 placeholder="{{order.orderSubmitDate}}">
@@ -34,15 +38,14 @@
                                 name="orderCompleteDate" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
                                     class="fa fa-calendar" aria-hidden="true"></i></button>
-
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col form-group">
                             <label for="classificationStatus">Status</label>
-                            <input disabled [(ngModel)]="order.classificationStatus" name="order.classificationStatus"
-                                class="form-control" id="classificationStatus"
-                                placeholder="{{order.classificationStatus}}">
+                            <input disabled [(ngModel)]="order.classification" name="order.classification"
+                                class="form-control" id="classification"
+                                placeholder="{{order.classification}}">
                         </div>
                         <div class="col form-group">
                             <label for="username"> Username</label>
@@ -52,12 +55,20 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-
-                        <textarea [(ngModel)]="order.description" name="order.description" class="form-control"
+                        <textarea disabled [(ngModel)]="order.description" name="order.description" class="form-control"
                             id="description" placeholder="not specified">{{order.description}}</textarea>
                     </div>
+                    <div class="form-group" *ngIf="isOwner">
+                        <label for="order.classification">Change status</label>
+                        <select [(ngModel)]="order.classification" name="classification" class="form-control">
+                            <option *ngFor="let classification of classifications" [ngValue]="classification">
+                                {{ classification }}
+                            </option>
+                        </select>
+                    </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info float-left" (click)="saveOrder()">Save</button>
+                        <button *ngIf="isOwner" type="submit" class="btn btn-info float-left"
+                            (click)="saveOrder()">Save</button>
                         <button type="submit" class="btn btn-danger float-right" (click)="deleteOrder()"><i
                                 class="fa fa-trash" aria-hidden="true"></i>Delete</button>
                     </div>
@@ -72,12 +83,12 @@
                                 <th>Product</th>
                                 <th width="120">Quantity</th>
                                 <th>Price</th>
-                                <th class="text-right">Action</th>
+                                <th class="text-right" *ngIf="isOwner">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="
-                    let orderContent of orderContents; let i = index" [attr.data-index]="i">
+                            <tr *ngFor="let orderContent of orderContents; 
+                            let i = index" [attr.data-index]="i">
                                 <td>
                                     <figure class="media">
                                         <figcaption class="media-body">
@@ -91,8 +102,15 @@
                                     </figure>
                                 </td>
                                 <td>
-                                    <input [(ngModel)]="orderContent.quantity" name="orderContent.quantity"
-                                        class="form-control" id="quantity" placeholder="{{ orderContent.quantity }}">
+                                    <div *ngIf="isClient">
+                                        <input disabled [(ngModel)]="orderContent.quantity" name="orderContent.quantity"
+                                            class="form-control" id="quantity"
+                                            placeholder="{{ orderContent.quantity }}">
+                                    </div>
+                                    <div *ngIf="isOwner">
+                                        <input [(ngModel)]="orderContent.quantity" name="quantity" class="form-control"
+                                            id="quantity" placeholder="{{ orderContent.quantity }}">
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="price-wrap">
@@ -101,9 +119,9 @@
                                         <dd>USD {{orderContent.price*orderContent.quantity}}</dd>
                                     </div>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right" *ngIf="isOwner">
                                     <div class="btn-group-vertical">
-                                        <a (click)="removeBook(orderContent.bookId)" class="btn btn-danger"><i
+                                        <a (click)="removeBook(orderContent)" class="btn btn-danger"><i
                                                 class="fa fa-trash" aria-hidden="true"></i> Remove</a>
                                         <a (click)="saveChanges(orderContent)" class="btn btn-info">Save
                                             changes</a>
@@ -113,6 +131,7 @@
                         </tbody>
                     </table>
                 </div>
+                <h5>Full price: ${{fullPrice}}</h5>
             </aside>
         </div>
     </div>

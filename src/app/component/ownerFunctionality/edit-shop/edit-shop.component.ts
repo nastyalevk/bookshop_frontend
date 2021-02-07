@@ -12,6 +12,7 @@ export class EditShopComponent implements OnInit {
 
   id: number;
   shop: Shop;
+  classifications=["open", "closed", "terminated"];
   constructor(private route: ActivatedRoute, protected router: Router, private shopService: ShopService) {
     this.id = this.route.snapshot.params.id;
     this.shop = new Shop();
@@ -41,14 +42,13 @@ export class EditShopComponent implements OnInit {
     this.shopService.getShop(this.id).subscribe(data => {
       this.shop = data;
       console.log(data);
-
     });
   }
 
   onSubmitShop() {
     console.log(this.shop);
     this.shopService.saveShop(this.shop).subscribe();
-    this.ngOnInit()
+    window.location.reload();
   }
 
 }

@@ -4,7 +4,8 @@
     <a href="/home" class="navbar-brand" routerLink="home">bookshop</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home</a>
+        <a href="/home" class="nav-link" routerLink="home"><i
+          class="fa fa-home" aria-hidden="true"></i> Home</a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
@@ -35,7 +36,8 @@
       </li>
 
       <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        <a href="/profile" class="nav-link" routerLink="profile"><i
+          class="fa fa-user" aria-hidden="true"></i> {{ username }}</a>
       </li>
 
       <li class="nav-item">

@@ -6,8 +6,7 @@ export class Order {
     deliveryAddress : string | undefined;
     description : string | undefined;
     orderSubmitDate : string | undefined;
-    classificationId : number | undefined;
-    classificationStatus : string | undefined;
+    classification : string | undefined;
     orderCompleteDate : string | undefined;
     username : string | undefined;
 }

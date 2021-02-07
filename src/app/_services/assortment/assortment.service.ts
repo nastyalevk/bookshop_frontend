@@ -27,4 +27,8 @@ export class AssortmentService {
   getOne(bookId: any, shopId: number): Observable<Assortment> {
     return this.http.get<Assortment>(Url + "/" + bookId + "/" + shopId);
   }
+
+  getByBook(bookId: any): Observable<Assortment[]> {
+    return this.http.get<Assortment[]>(Url + "/" + bookId);
+  }
 }

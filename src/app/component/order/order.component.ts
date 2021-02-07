@@ -18,12 +18,12 @@ export class OrderComponent implements OnInit {
   items: Cart[];
   orderContent: OrderContent;
   order = new Order();
-  today = new Date();
   itemsInOrder: Cart[] = [];
 
   deliveryAddress : string | undefined;
   description : string | undefined;
 
+  today = new Date();
   dd = String(this.today.getDate()).padStart(2, '0');
   ddnew = String(this.today.getDate() + 1).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
@@ -40,24 +40,24 @@ export class OrderComponent implements OnInit {
 
   onSubmit() {
     let shops = this.cartService.getShopList();
-    let orderAmound = this.cartService.getShopsAmound(shops);
+    let orderAmound = shops.length;
     this.deliveryAddress = this.order.deliveryAddress;
     this.description = this.order.description;
     for (let i = 0; i < orderAmound; i++) {
       this.itemsInOrder = new Array<Cart>();
-      this.setOrder(shops[i])
-      this.setItemsInOrder(shops[i])
+      this.setOrder(shops[i]);
+      this.setItemsInOrder(shops[i]);
       this.saveOrder();
     }
     this.cartService.clearCart();
     this.router.navigate(['/order-info']);
   }
 
-  setItemsInOrder(shop: Shop) {
+  setItemsInOrder(shop: number) {
     for (let item of this.items) {
-      if (item.shop.shopName == shop.shopName) {
-        this.itemsInOrder.push(item)
-        this.order.cost += item.quantity * item.shop.price;
+      if (item.assortment.shopId == shop) {
+        this.itemsInOrder.push(item);
+        this.order.cost += item.quantity * item.assortment.price;
       }
     }
   }
@@ -69,22 +69,21 @@ export class OrderComponent implements OnInit {
         this.orderContent = new OrderContent();
         this.orderContent.bookId = item.book.id;
         this.orderContent.orderId = data.orderId;
-        this.orderContent.price = item.shop.price;
+        this.orderContent.price = item.assortment.price;
         this.orderContent.quantity = item.quantity
         this.orderService.saveOrderContent(this.orderContent).subscribe();
       }
     });
   }
 
-  setOrder(shop: Shop) {
+  setOrder(shopId: number) {
     this.order = new Order();
     this.order.deliveryAddress = this.deliveryAddress;
     this.order.description = this.description;
     this.order.cost = 0;
-    this.order.classificationId = 10;
-    this.order.classificationStatus = 'open';
+    this.order.classification = 'open';
     this.order.orderSubmitDate = this.mm + '/' + this.dd + '/' + this.yyyy;
-    this.order.shopId = shop.id;
+    this.order.shopId = shopId;
     this.order.orderCompleteDate = this.mm + '/' + this.ddnew + '/' + this.yyyy;
     this.order.username = this.tokenStorage.getUser().username;
     this.order.orderNumber = Math.random() * 10000;

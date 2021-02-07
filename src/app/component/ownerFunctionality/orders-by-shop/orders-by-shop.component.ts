@@ -14,6 +14,13 @@ export class OrdersByShopComponent implements OnInit {
 
   id: number;
   orders: Order[] = [];
+  currentOrder?: Order;
+  currentIndex = -1;
+
+  page = 1;
+  count = 0;
+  pageSize = 9;
+  pageSizes = [9, 12, 15];
   constructor(private route: ActivatedRoute, protected router: Router, private orderService: OrderService, 
     private shopService: ShopService, private bookService: BookService) { 
       this.id = this.route.snapshot.params.id;
@@ -26,9 +33,15 @@ export class OrdersByShopComponent implements OnInit {
 
 
   getAllOrders() {
-    this.orderService.getOrderByShop(this.id).subscribe(data => {
-      this.orders = data;
-      console.log(data);
+    this.orderService.getOrderByShop(this.page, this.pageSize, this.id).subscribe(response => {
+      const { content, totalElements } = response.body;
+
+      this.orders = content;
+      this.count = totalElements;
+      console.log(response);
+    },
+    error => {
+      console.log(error);
     });
    
   }
@@ -49,5 +62,21 @@ export class OrdersByShopComponent implements OnInit {
 
   goToOrder(orderId: number){
     this.router.navigate([`order/edit/${orderId}`]);
+  }
+
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.getAllOrders();
+  }
+
+  handlePageSizeChange(event: any): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.getAllOrders();
+  }
+
+  setActiveBook(order: Order, index: number): void {
+    this.currentOrder = order;
+    this.currentIndex = index;
   }
 }

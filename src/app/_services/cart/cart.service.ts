@@ -3,6 +3,7 @@ import { Cart } from 'src/app/model/cart/cart';
 import { OrderContent } from 'src/app/model/orderContent/order-content';
 import { Shop } from 'src/app/model/shop/shop';
 import { OrderService } from '../order/order.service';
+import { ShopService } from '../shop/shop.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,10 @@ export class CartService {
   items = new Map<string, Cart>();
   orderContent: OrderContent;
 
-  constructor(private orderService: OrderService) { }
+  constructor(shopService: ShopService) { }
 
   addToCart(item: Cart) {
-    let key = "book_" + item.book.id.toString() + "_" + item.shop.id;
+    let key = "book_" + item.book.id.toString() + "_" + item.assortment.shopId;
     this.items.set(key, item);
   }
 
@@ -37,29 +38,15 @@ export class CartService {
   }
 
   remove(item: Cart) {
-    let key = "book_" + item.book.id.toString() + "_" + item.shop.id;
+    let key = "book_" + item.book.id.toString() + "_" + item.assortment.shopId;
     this.items.delete(key);
   }
 
-  getShopList(): Shop[] {
-    let shops = new Array<Shop>();
+  getShopList() {
+    let shops = new Array<number>();
     for (let key of this.items.keys()) {
-      shops.push(this.items.get(key).shop)
+      shops.push(this.items.get(key).assortment.shopId)
     }
     return shops;
-  }
-
-  getShopsAmound(shops: Shop[]) {
-    let shopNames = new Array<string>();
-    for (let shop of shops) {
-      shopNames.push(shop.shopName);
-    }
-    var uniqueArray = [];
-    for (let i = 0; i < shopNames.length; i++) {
-      if (uniqueArray.indexOf(shopNames[i]) === -1) {
-        uniqueArray.push(shopNames[i]);
-      }
-    }
-    return uniqueArray.length;
   }
 }

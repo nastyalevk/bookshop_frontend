@@ -12,8 +12,8 @@ const Url = 'http://localhost:8087/';
 export class UserService {
 
   constructor(private http: HttpClient) {
-    
-   }
+
+  }
 
   getPublicContent(): Observable<any> {
     return this.http.get<Book[]>(Url + 'book');
@@ -45,6 +45,6 @@ export class UserService {
   }
 
   getUserByUsername(username: string): Observable<User> {
-    return this.http.get<User>('http://localhost:8087/user/find/username/' + username);
+    return this.http.get<User>(Url + 'user/find/username/' + username);
   }
 }

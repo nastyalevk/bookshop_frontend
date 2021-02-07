@@ -17,8 +17,8 @@ export class BookPersonalPageInShopComponent implements OnInit {
   shopId: number;
   book: Book;
   today = new Date();
-
-
+  classifications=["open", "active", "waiting", "closed"];
+  classif: string;
   quantity: number;
   price: number;
 
@@ -41,6 +41,8 @@ export class BookPersonalPageInShopComponent implements OnInit {
     this.assortmentService.getOne(this.bookId, this.shopId).subscribe(data => {
       this.quantity = data.quantity;
       this.price = data.price
+      this.classif = data.classification;
+
     });
 
     console.log(this.assortment);
@@ -50,18 +52,19 @@ export class BookPersonalPageInShopComponent implements OnInit {
   onSubmitBook() {
     this.assortment.bookId = this.bookId.toString();
     this.assortment.shopId = this.shopId;
-    this.assortment.classificationId = 5;
     this.assortment.creationDate = this.mm + '/' + this.dd + '/' + this.yyyy;
+    this.assortment.classification = this.classif;
     this.assortment.quantity = this.quantity;
     this.assortment.price = this.price;
     this.assortmentService.saveAssortment(this.assortment).subscribe(data => {
       this.assortment = this.assortment;
     })
-    this.router.navigate([`/shop/${this.shopId}`]);  }
+    // this.router.navigate([`/shop/${this.shopId}`]);  
+  }
 
   deleteFromShop() {
     this.assortmentService.deleteAssortment(this.bookId, this.shopId).subscribe();
-    this.router.navigate([`/shop/${this.shopId}`]);
+    // this.router.navigate([`/shop/${this.shopId}`]);
 
   }
 }

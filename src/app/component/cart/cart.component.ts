@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Assortment } from 'src/app/model/assortment/assortment';
 import { Cart } from 'src/app/model/cart/cart';
+import { AssortmentService } from 'src/app/_services/assortment/assortment.service';
 import { CartService } from 'src/app/_services/cart/cart.service';
+import { ShopService } from 'src/app/_services/shop/shop.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,13 +14,31 @@ import { CartService } from 'src/app/_services/cart/cart.service';
 export class CartComponent implements OnInit {
   items: Cart[];
   bookQuantity = [1, 2, 3, 4];
-
-  constructor(private router: Router,private cartService: CartService) {
+  fullPrice = 0;
+  assortment: Assortment;
+  isAvaliable: Map<string, boolean>;
+  shopNames:string[]=[];
+  constructor(private router: Router, private cartService: CartService, private assortmentService: AssortmentService, private shopService: ShopService) {
     this.items = this.cartService.toArray();
+    this.assortment = new Assortment();
+    this.isAvaliable = new Map<string, boolean>();
   }
 
   ngOnInit(): void {
     this.items = this.cartService.toArray();
+    this.fullPrice = 0;
+    for (let i of this.items) {
+      this.fullPrice += i.quantity * i.assortment.price;
+    }
+    this.isAvaliable.clear();
+    for (let i of this.items) {
+      this.isAvaliable.set(i.book.id.toString() + i.assortment.shopId.toString(), true);
+    }
+    for(let i of this.items){
+      this.shopService.getShop(i.assortment.shopId).subscribe(data=>{
+        this.shopNames.push(data.shopName);
+      });
+    }
   }
 
   remove(item: Cart) {
@@ -25,12 +46,42 @@ export class CartComponent implements OnInit {
     this.ngOnInit();
   }
 
-  handleQuantityChange(event: any, item: Cart): void {
-    let quantity = event.target.value;
-    item.quantity = quantity;
+  handleQuantityChange(item: Cart): void {
+    console.log(item);
     this.cartService.addToCart(item);
+    this.fullPrice = 0;
+
+    this.assortmentService.getOne(item.book.id, item.assortment.shopId).subscribe(data => {
+      console.log(this.assortment);
+      this.assortment = data;
+      if (this.assortment.quantity < item.quantity) {
+        this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), false);
+      } else {
+        this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), true);
+
+      }
+    });
+    for (let i of this.items) {
+      this.fullPrice += i.quantity * i.assortment.price;
+    }
   }
-  order(){
+
+  isOrderButton(): boolean {
+    for (let [key, value] of this.isAvaliable) {
+      if (!this.isAvaliable.get(key)) {
+        return false
+      }
+    }
+    return true
+  }
+  isAvaliableSet() {
+
+  }
+  isBookAvaliable(bookId: number, shopId: number): boolean {
+    console.log(this.isAvaliable)
+    return this.isAvaliable.get(bookId.toString() + shopId.toString());
+  }
+  order() {
     this.router.navigate(['/order']);
   }
 }

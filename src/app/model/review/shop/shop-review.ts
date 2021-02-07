@@ -1,7 +1,9 @@
 export class ShopReview {
-    id: number;
-    username: string;
-    comment: string;
-    rating: number;
-    shopId: number;
+    id: number | undefined;
+    username: string | undefined;
+    comment: string | undefined;
+    rating: number | undefined;
+    shopId: number | undefined;
+    datetime: string | undefined;
+
 }

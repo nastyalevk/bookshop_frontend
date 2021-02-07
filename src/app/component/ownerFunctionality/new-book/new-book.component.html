@@ -61,6 +61,14 @@
                     <input [(ngModel)]="assortment.price" name="price" class="form-control" id="price"
                         placeholder="{{assortment.price}}">
                 </div>
+                <div class="form-group">
+                    <label for="assortment.classification">Status:</label>
+                    <select [(ngModel)]="assortment.classification" name="classification" class="form-control">
+                        <option *ngFor="let classification of classifications" [ngValue]="classification">
+                            {{ classification }}
+                        </option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-info" (click)="onSubmitBook()">Save</button>
             </form>
         </div>

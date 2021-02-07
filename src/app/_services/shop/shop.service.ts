@@ -12,12 +12,16 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getShopsByUsername(username: string): Observable<any> {
-    return this.http.get(Url + "/username/" + username);
+  getShopsByUsername(): Observable<any> {
+    return this.http.get(Url + "/username");
   }
 
-  getShop(id: number): Observable<any>{
-    return this.http.get(Url + "/" + id);
+  getShop(shopId: number): Observable<Shop>{
+    return this.http.get<Shop>(Url + "/" + shopId);
+  }
+
+  getShopByBook(shopId: number): Observable<any>{
+    return this.http.get(Url + "/book/" + shopId);
   }
 
   saveShop(shop: Shop):Observable<Shop> {
