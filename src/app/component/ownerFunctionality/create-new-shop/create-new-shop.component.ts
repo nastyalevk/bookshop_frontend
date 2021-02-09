@@ -15,12 +15,8 @@ export class CreateNewShopComponent implements OnInit {
 
   shop: Shop;
   user: User;
+  classifications=["open", "terminated", "closed"];
 
-  today = new Date();
-
-  dd = String(this.today.getDate()).padStart(2, '0');
-  mm = String(this.today.getMonth() + 1).padStart(2, '0');
-  yyyy = this.today.getFullYear();
   constructor(protected router: Router, private shopService: ShopService,
     private userService: UserService, private tokenStorage: TokenStorageService) {
     this.shop = new Shop();

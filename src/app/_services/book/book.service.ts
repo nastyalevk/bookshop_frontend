@@ -20,10 +20,6 @@ export class BookService {
     return this.http.get(bookUrl + id);
   }
 
-  getPrice(id: number): Observable<any> {
-    return this.http.get("http://localhost:8087/assortment/price/" + id);
-  }
-
   getShop(id: number): Observable<any> {
     return this.http.get("http://localhost:8087/shop/book/" + id);
   }

@@ -21,7 +21,11 @@ export class AddExistentBookInShopComponent implements OnInit {
 
   dd = String(this.today.getDate()).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
-  yyyy = this.today.getFullYear();
+  yyyy = String(this.today.getFullYear());
+  hh = String(this.today.getHours());
+  MM = String(this.today.getMinutes());
+  ss = String(this.today.getSeconds());
+  
   constructor(private route: ActivatedRoute, protected router: Router, private bookService: BookService,               
     private assortmentService: AssortmentService) {
     this.assortment=new Assortment();
@@ -39,7 +43,7 @@ export class AddExistentBookInShopComponent implements OnInit {
   onSubmitBook(){
     this.assortment.bookId = this.bookId.toString();
     this.assortment.shopId = this.shopId;
-    this.assortment.creationDate = this.mm + '/' + this.dd + '/' + this.yyyy;
+    this.assortment.creationDate = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
     this.assortmentService.saveAssortment(this.assortment).subscribe(data=>{
       this.assortment = this.assortment;
     })

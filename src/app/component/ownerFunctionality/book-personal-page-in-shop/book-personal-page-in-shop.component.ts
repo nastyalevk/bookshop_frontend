@@ -18,13 +18,14 @@ export class BookPersonalPageInShopComponent implements OnInit {
   book: Book;
   today = new Date();
   classifications=["open", "active", "waiting", "closed"];
-  classif: string;
-  quantity: number;
-  price: number;
 
   dd = String(this.today.getDate()).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
-  yyyy = this.today.getFullYear();
+  yyyy = String(this.today.getFullYear());
+  hh = String(this.today.getHours());
+  MM = String(this.today.getMinutes());
+  ss = String(this.today.getSeconds());
+  
   constructor(private route: ActivatedRoute, protected router: Router, private bookService: BookService,
     private assortmentService: AssortmentService) {
     this.assortment = new Assortment();
@@ -39,10 +40,7 @@ export class BookPersonalPageInShopComponent implements OnInit {
 
     });
     this.assortmentService.getOne(this.bookId, this.shopId).subscribe(data => {
-      this.quantity = data.quantity;
-      this.price = data.price
-      this.classif = data.classification;
-
+      this.assortment = data;
     });
 
     console.log(this.assortment);
@@ -50,15 +48,13 @@ export class BookPersonalPageInShopComponent implements OnInit {
   }
 
   onSubmitBook() {
-    this.assortment.bookId = this.bookId.toString();
-    this.assortment.shopId = this.shopId;
-    this.assortment.creationDate = this.mm + '/' + this.dd + '/' + this.yyyy;
-    this.assortment.classification = this.classif;
-    this.assortment.quantity = this.quantity;
-    this.assortment.price = this.price;
+    this.assortment.creationDate = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
+    console.log(this.assortment);
     this.assortmentService.saveAssortment(this.assortment).subscribe(data => {
       this.assortment = this.assortment;
-    })
+    });
+    window.location.reload();
+
     // this.router.navigate([`/shop/${this.shopId}`]);  
   }
 

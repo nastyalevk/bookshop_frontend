@@ -59,7 +59,7 @@ export class ShopReviewComponent implements OnInit {
   }
   saveComment() {
     this.review.shopId = this.shopId;
-    this.review.datetime = this.yyyy+"-"+this.mm+"-"+this.dd+" "+this.hh+":"+this.MM+":"+this.ss;
+    this.review.datetime = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
     console.log(this.review);
     this.reviewService.saveShopReview(this.review).subscribe();
     window.location.reload();

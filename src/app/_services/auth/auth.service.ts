@@ -24,10 +24,15 @@ export class AuthService {
   }
 
   register(username: string, email: string, password: string): Observable<any> {
+    console.log("register");
     return this.http.post(AUTH_API + 'signup', {
       username,
       email,
       password
     }, httpOptions);
+  }
+
+  verifyToken(token: string): Observable<any>{
+    return this.http.get<any>(AUTH_API + `verify/?code=${token}`);
   }
 }

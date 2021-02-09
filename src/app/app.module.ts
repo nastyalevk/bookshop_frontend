@@ -8,9 +8,8 @@ import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { BoardAdminComponent } from './component/board/board-admin/board-admin.component';
+import { BoardAdminComponent } from './component/board-admin/board-admin.component';
 import { BoardOwnerComponent } from './component/ownerFunctionality/board-owner/board-owner.component';
-// import { BoardClientComponent } from './component/board/board-client/board-client.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { AgGridModule } from 'ag-grid-angular';
 import { UserComponent } from './component/user/user.component';
@@ -33,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShopPersonalPageComponent } from './component/shop-personal-page/shop-personal-page.component';
 import { ShopReviewComponent } from './component/shop-review/shop-review.component';
 import { BoardClientComponent } from './component/board-client/board-client.component';
+import { TokenVerificationComponent } from './component/token-verification/token-verification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +59,8 @@ import { BoardClientComponent } from './component/board-client/board-client.comp
     CreateNewShopComponent,
     EditOrderComponent,
     ShopPersonalPageComponent,
-    ShopReviewComponent
+    ShopReviewComponent,
+    TokenVerificationComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@
 
 				<p *ngIf="isAvaliable" class="price-detail-wrap">
 					<span class="price h3 text-warning">
-						<span class="currency">at least: $</span><span class="num">{{price}}</span>
+						<span class="currency">at least: $</span><span class="num">{{minPrice}}</span>
 					</span>
 				</p>
 
@@ -43,12 +43,13 @@
 					<dt>Shops: </dt>
 					<table class="table table-hover table-responsive">
 						<tbody>
-							<tr *ngFor="let shop of shops;  let i = index">
-								<td>{{ shop.id }}</td>
-								<td (click)="goToShop(shop.id)">{{ shop.shopName }}</td>
-								<td>{{ shop.country }}</td>
-								<td>{{ shop.city }}</td>
-								<td>{{ shop.address }}</td>
+							<tr *ngFor="let assortment of assortments;  let i = index">
+								<td>{{ shopAssortment.get(assortment).id }}</td>
+								<td (click)="goToShop(shopAssortment.get(assortment).id)">{{
+									shopAssortment.get(assortment).shopName }}</td>
+								<td>{{ shopAssortment.get(assortment).country }}</td>
+								<td>{{ shopAssortment.get(assortment).city }}</td>
+								<td>{{ shopAssortment.get(assortment).address }}</td>
 								<td>${{ assortments[i].price }}</td>
 								<td>
 									<h6>Availability: </h6>{{ assortments[i].classification}}
@@ -56,9 +57,10 @@
 								<td>
 									<div *ngIf="isOpen(assortments[i].classification)">
 										<button class="btn btn-primary btn-raised text-white float-center mt-3"
-											*ngIf="!inCart(shop.id)" (click)="onSubmit(assortments[i])"><i
-												class="fas fa-shopping-cart"></i> Add to cart</button>
-										<button *ngIf="inCart(shop.id)"
+											*ngIf="!inCart(shopAssortment.get(assortment).id)"
+											(click)="onSubmit(assortments[i])"><i class="fas fa-shopping-cart"></i> Add
+											to cart</button>
+										<button *ngIf="inCart(shopAssortment.get(assortment).id)"
 											class="btn btn-primary btn-success btn-raised text-white float-center mt-3"
 											(click)="onSubmit(assortments[i])"><i class="fas fa-shopping-cart"></i>
 											already in

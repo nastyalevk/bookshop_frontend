@@ -22,7 +22,10 @@ export class NewBookComponent implements OnInit {
 
   dd = String(this.today.getDate()).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
-  yyyy = this.today.getFullYear();
+  yyyy = String(this.today.getFullYear());
+  hh = String(this.today.getHours());
+  MM = String(this.today.getMinutes());
+  ss = String(this.today.getSeconds());
   constructor(private route: ActivatedRoute, protected router: Router, private bookService: BookService, private assortmentService: AssortmentService) {
     this.id = this.route.snapshot.params.id;
   }
@@ -50,7 +53,7 @@ export class NewBookComponent implements OnInit {
     this.bookService.saveBook(this.book).subscribe(data => {
       this.assortment.bookId = data.id;
       this.assortment.shopId = this.id;
-      this.assortment.creationDate = this.mm + '/' + this.dd + '/' + this.yyyy;
+      this.assortment.creationDate = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
       console.log(this.assortment);
       this.assortmentService.saveAssortment(this.assortment).subscribe();
     });

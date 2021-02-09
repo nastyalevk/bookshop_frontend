@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BoardAdminComponent } from './component/board/board-admin/board-admin.component';
+import { BoardAdminComponent } from './component/board-admin/board-admin.component';
 import { BoardClientComponent } from './component/board-client/board-client.component';
 import { BoardOwnerComponent } from './component/ownerFunctionality/board-owner/board-owner.component';
 import { HomeComponent } from './component/home/home.component';
@@ -24,6 +24,7 @@ import { CreateNewShopComponent } from './component/ownerFunctionality/create-ne
 import { EditOrderComponent } from './component/ownerFunctionality/edit-order/edit-order.component';
 import { ShopPersonalPageComponent } from './component/shop-personal-page/shop-personal-page.component';
 import { ShopReviewComponent } from './component/shop-review/shop-review.component';
+import { TokenVerificationComponent } from './component/token-verification/token-verification.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'order/edit/:orderId', component: EditOrderComponent },
   { path: 'shop/page/:shopId', component: ShopPersonalPageComponent },
   { path: 'shop/:shopId/review', component: ShopReviewComponent},
+  { path: 'auth/:token', component: TokenVerificationComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

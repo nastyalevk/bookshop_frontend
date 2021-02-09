@@ -22,13 +22,14 @@ import { TokenStorageService } from 'src/app/_services/token/token-storage.servi
 export class BookComponent implements OnInit {
   id: number;
   book: Book;
-  price: any;
-  shops: Shop[] = [];
+  minPrices: number[] = [];
+  minPrice = 0;
   isCart: Map<string, boolean>;
   reviews: BookReview[] = [];
   review: BookReview;
   isAvaliable = false;
   assortments: Assortment[] = [];
+  shopAssortment: Map<Assortment, Shop>;
   private roles: string[] = [];
   isClient = false;
   isLoggedIn = false;
@@ -40,7 +41,7 @@ export class BookComponent implements OnInit {
   hh = String(this.today.getHours());
   MM = String(this.today.getMinutes());
   ss = String(this.today.getSeconds());
-  
+
   constructor(private route: ActivatedRoute, protected router: Router,
     private bookService: BookService, private appComponent: AppComponent,
     private cartService: CartService, private assortmentService: AssortmentService, private shopService: ShopService,
@@ -51,6 +52,7 @@ export class BookComponent implements OnInit {
     this.review = new BookReview();
     this.review.rating = 0;
     this.roles = this.tokenStorageService.getUser().roles;
+    this.shopAssortment = new Map<Assortment, Shop>();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     console.log(this.isLoggedIn);
     if (this.isLoggedIn) {
@@ -65,12 +67,13 @@ export class BookComponent implements OnInit {
         this.assortments = data;
         for (let i of this.assortments) {
           this.shopService.getShop(i.shopId).subscribe(data => {
-            this.shops.push(data);
-            if (this.shops.length) {
+            this.shopAssortment.set(i, data);
+            if (this.shopAssortment.keys()) {
               this.isAvaliable = true;
-              this.bookService.getPrice(this.id).subscribe(data => {
-                this.price = data;
-              });
+              for (let j of this.shopAssortment.keys()) {
+                this.minPrices.push(j.price);
+              }
+              this.minPrice = this.minPrices.sort((n1, n2) => n1 - n2)[0];
             } else {
               this.isAvaliable = false;
             }
@@ -108,10 +111,11 @@ export class BookComponent implements OnInit {
 
   saveComment() {
     this.review.bookId = this.id;
-    this.review.datetime = this.yyyy+"-"+this.mm+"-"+this.dd+" "+this.hh+":"+this.MM+":"+this.ss;
+    this.review.datetime = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
     this.reviewService.saveBookReview(this.review).subscribe();
-    window.location.reload();
+    // window.location.reload();
   }
+  
   isOpen(classification: string): boolean {
     if (classification == "open") {
       return true;

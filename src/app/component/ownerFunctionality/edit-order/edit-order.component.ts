@@ -29,6 +29,7 @@ export class EditOrderComponent implements OnInit {
   dd: number;
   mm: number;
   yyyy: number;
+
   constructor(private orderService: OrderService, private route: ActivatedRoute, protected router: Router,
     private bookService: BookService, private tokenStorageService: TokenStorageService) {
     this.orderId = this.route.snapshot.params.orderId;
@@ -61,7 +62,7 @@ export class EditOrderComponent implements OnInit {
       this.dd = this.model.day;
       this.mm = this.model.month;
       this.yyyy = this.model.year;
-      this.order.orderCompleteDate = this.mm + '/' + this.dd + '/' + this.yyyy;
+      this.order.orderCompleteDate = this.mm + '-' + this.dd + '-' + this.yyyy;
     }
     this.orderService.saveOrder(this.order).subscribe(data => {
       this.order = data;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Cart } from 'src/app/model/cart/cart';
 import { Order } from 'src/app/model/order/order';
 import { OrderContent } from 'src/app/model/orderContent/order-content';
@@ -20,14 +21,17 @@ export class OrderComponent implements OnInit {
   order = new Order();
   itemsInOrder: Cart[] = [];
 
-  deliveryAddress : string | undefined;
-  description : string | undefined;
-
+  deliveryAddress: string | undefined;
+  description: string | undefined;
+  model: NgbDateStruct;
   today = new Date();
   dd = String(this.today.getDate()).padStart(2, '0');
   ddnew = String(this.today.getDate() + 1).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');
-  yyyy = this.today.getFullYear();
+  yyyy = String(this.today.getFullYear());
+  hh = String(this.today.getHours());
+  MM = String(this.today.getMinutes());
+  ss = String(this.today.getSeconds());
 
   constructor(private router: Router, private cartService: CartService,
     private tokenStorage: TokenStorageService, private orderService: OrderService) {
@@ -47,6 +51,7 @@ export class OrderComponent implements OnInit {
       this.itemsInOrder = new Array<Cart>();
       this.setOrder(shops[i]);
       this.setItemsInOrder(shops[i]);
+      console.log(this.order);
       this.saveOrder();
     }
     this.cartService.clearCart();
@@ -82,9 +87,19 @@ export class OrderComponent implements OnInit {
     this.order.description = this.description;
     this.order.cost = 0;
     this.order.classification = 'open';
-    this.order.orderSubmitDate = this.mm + '/' + this.dd + '/' + this.yyyy;
+    this.order.orderSubmitDate = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
     this.order.shopId = shopId;
-    this.order.orderCompleteDate = this.mm + '/' + this.ddnew + '/' + this.yyyy;
+    if (this.model) {
+      this.dd = String(this.model.day);
+      this.mm = String(this.model.month);
+      this.yyyy = String(this.model.year);
+      this.hh = "00";
+      this.MM = "00";
+      this.ss = "00";
+      this.order.orderCompleteDate = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
+    } else {
+      this.order.orderCompleteDate = this.yyyy + "-" + this.mm + "-" + this.ddnew + " " + this.hh + ":" + this.MM + ":" + this.ss;
+    }
     this.order.username = this.tokenStorage.getUser().username;
     this.order.orderNumber = Math.random() * 10000;
   }
