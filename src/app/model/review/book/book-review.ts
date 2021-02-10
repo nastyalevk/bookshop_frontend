@@ -5,4 +5,5 @@ export class BookReview {
     rating: number | undefined;
     bookId: number | undefined;
     datetime: string | undefined;
+    approved: boolean | undefined;
 }

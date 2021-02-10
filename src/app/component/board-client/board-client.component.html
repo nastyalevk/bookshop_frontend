@@ -25,7 +25,7 @@
                         <td>{{ order.orderSubmitDate }}</td>
                         <td>{{ order.orderCompleteDate }}</td>
                         <td>{{ order.cost }}</td>
-                        <td>{{ order.shopId }}</td>
+                        <td>{{ shops.get(order.shopId) }}</td>
                     </tr>
                 </tbody>
             </table>

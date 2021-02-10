@@ -52,7 +52,7 @@
 								<td>{{ shopAssortment.get(assortment).address }}</td>
 								<td>${{ assortments[i].price }}</td>
 								<td>
-									<h6>Availability: </h6>{{ assortments[i].classification}}
+									<h6>Availability: </h6>{{ getStatus(assortment.quantity)}}
 								</td>
 								<td>
 									<div *ngIf="isOpen(assortments[i].classification)">
@@ -80,8 +80,8 @@
 				<form *ngIf="isClient">
 					<div class="form-group">
 						<label for="comment">Your Comment</label>
-						<textarea name="comment" [(ngModel)]="review.comment" id="comment" class="form-control"
-							rows="3"></textarea>
+						<textarea name="comment" maxlength="999" [(ngModel)]="review.comment" id="comment" placeholder="Your comment"
+							class="form-control" rows="3"></textarea>
 					</div>
 					<ngb-rating [(rate)]="review.rating"></ngb-rating>
 					<button type="submit" class="btn btn-info float-right" (click)="saveComment()">Send</button>
@@ -100,6 +100,8 @@
 							</div>
 						</div>
 						<ngb-rating [(rate)]="review.rating"></ngb-rating>
+						<button *ngIf="currentUser==review.username" type="button" class="btn btn-outline-secondary btn-sm float-right"
+							(click)="editComment(review.id)">Edit</button>
 						<p>
 							{{review.comment}}<br>
 						</p>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/model/order/order';
 import { OrderService } from 'src/app/_services/order/order.service';
+import { ShopService } from 'src/app/_services/shop/shop.service';
 
 @Component({
   selector: 'app-board-client',
@@ -12,13 +13,16 @@ export class BoardClientComponent implements OnInit {
   orders: Order[] = [];
   currentOrder?: Order;
   currentIndex = -1;
-
+  shops: Map<number, string>;
   page = 1;
   count = 0;
   pageSize = 9;
   pageSizes = [9, 12, 15];
 
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, private router: Router,
+    private shopService: ShopService) {
+      this.shops = new Map<number, string>();
+     }
 
   ngOnInit(): void {
     this.getAllOrders();
@@ -31,6 +35,12 @@ export class BoardClientComponent implements OnInit {
 
       this.orders = content;
       this.count = totalElements;
+      this.shops.clear()
+      for (let i of this.orders) {
+        this.shopService.getShop(i.shopId).subscribe(data=>{
+          this.shops.set(i.shopId, data.shopName);
+        });
+      }
       console.log(response);
     },
       error => {

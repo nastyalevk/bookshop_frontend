@@ -25,6 +25,10 @@ import { EditOrderComponent } from './component/ownerFunctionality/edit-order/ed
 import { ShopPersonalPageComponent } from './component/shop-personal-page/shop-personal-page.component';
 import { ShopReviewComponent } from './component/shop-review/shop-review.component';
 import { TokenVerificationComponent } from './component/token-verification/token-verification.component';
+import { BookCommentApproveComponent } from './component/comment-approve/book-comment-approve/book-comment-approve.component';
+import { ShopCommentApproveComponent } from './component/comment-approve/shop-comment-approve/shop-comment-approve.component';
+import { EditCommentComponent } from './component/comment-approve/edit-comment/edit-comment.component';
+import { NotExistComponent } from './component/not-exist/not-exist.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -52,6 +56,12 @@ const routes: Routes = [
   { path: 'shop/page/:shopId', component: ShopPersonalPageComponent },
   { path: 'shop/:shopId/review', component: ShopReviewComponent},
   { path: 'auth/:token', component: TokenVerificationComponent},
+  { path: 'admin/book/comments', component: BookCommentApproveComponent},
+  { path: 'admin/shop/comments', component: ShopCommentApproveComponent},
+  { path: 'review/:reviewId/shop/:shopId', component: EditCommentComponent},
+  { path: 'review/:reviewId/book/:bookId', component: EditCommentComponent},
+  { path: 'error', component: NotExistComponent},
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -21,6 +21,22 @@ export class ReviewService {
     return this.http.get(Url + "/book/" + bookId);
   }
 
+  getOneShopReview(reviewId: number): Observable<ShopReview>{
+    return this.http.get<ShopReview>(Url + "/one/shop/" + reviewId);
+  }
+
+  getOneBookReview(reviewId: number): Observable<BookReview>{
+    return this.http.get<BookReview>(Url + "/one/book/" + reviewId);
+  }
+
+  getShopReviewAdmin(): Observable<any>{
+    return this.http.get(Url + "/approve/shop/");
+  }
+
+  getBookReviewAdmin(): Observable<any>{
+    return this.http.get(Url + "/approve/book/");
+  }
+
   saveBookReview(review: BookReview): Observable<BookReview>{
     return this.http.post<BookReview>(Url+ "/book/create/", review);
   }

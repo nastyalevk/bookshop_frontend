@@ -33,6 +33,11 @@ import { ShopPersonalPageComponent } from './component/shop-personal-page/shop-p
 import { ShopReviewComponent } from './component/shop-review/shop-review.component';
 import { BoardClientComponent } from './component/board-client/board-client.component';
 import { TokenVerificationComponent } from './component/token-verification/token-verification.component';
+import { BookCommentApproveComponent } from './component/comment-approve/book-comment-approve/book-comment-approve.component';
+import { ShopCommentApproveComponent } from './component/comment-approve/shop-comment-approve/shop-comment-approve.component';
+import { EditCommentComponent } from './component/comment-approve/edit-comment/edit-comment.component';
+import { NotExistComponent } from './component/not-exist/not-exist.component';
+import { NgbdModalContentComponent } from './component/ngbd-modal-content/ngbd-modal-content.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +65,12 @@ import { TokenVerificationComponent } from './component/token-verification/token
     EditOrderComponent,
     ShopPersonalPageComponent,
     ShopReviewComponent,
-    TokenVerificationComponent
+    TokenVerificationComponent,
+    BookCommentApproveComponent,
+    ShopCommentApproveComponent,
+    EditCommentComponent,
+    NotExistComponent,
+    NgbdModalContentComponent
   ],
   imports: [
     BrowserModule,

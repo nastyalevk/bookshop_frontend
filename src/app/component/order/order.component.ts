@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Cart } from 'src/app/model/cart/cart';
 import { Order } from 'src/app/model/order/order';
 import { OrderContent } from 'src/app/model/orderContent/order-content';
@@ -8,6 +8,7 @@ import { Shop } from 'src/app/model/shop/shop';
 import { CartService } from 'src/app/_services/cart/cart.service';
 import { OrderService } from 'src/app/_services/order/order.service';
 import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
+import { NgbdModalContentComponent } from '../ngbd-modal-content/ngbd-modal-content.component';
 
 @Component({
   selector: 'app-order',
@@ -34,7 +35,7 @@ export class OrderComponent implements OnInit {
   ss = String(this.today.getSeconds());
 
   constructor(private router: Router, private cartService: CartService,
-    private tokenStorage: TokenStorageService, private orderService: OrderService) {
+    private tokenStorage: TokenStorageService, private orderService: OrderService, private modalService: NgbModal) {
     this.items = this.cartService.toArray();
     this.order.cost = 0;
     this.orderContent = new OrderContent();
@@ -54,8 +55,6 @@ export class OrderComponent implements OnInit {
       console.log(this.order);
       this.saveOrder();
     }
-    this.cartService.clearCart();
-    this.router.navigate(['/order-info']);
   }
 
   setItemsInOrder(shop: number) {
@@ -76,9 +75,22 @@ export class OrderComponent implements OnInit {
         this.orderContent.orderId = data.orderId;
         this.orderContent.price = item.assortment.price;
         this.orderContent.quantity = item.quantity
-        this.orderService.saveOrderContent(this.orderContent).subscribe();
+        this.orderService.saveOrderContent(this.orderContent).subscribe(() => {
+          this.ngOnInit()
+        },
+          err => {
+            const modalRef = this.modalService.open(NgbdModalContentComponent);
+            modalRef.componentInstance.message = err.error.message;
+          });
       }
-    });
+
+      this.cartService.clearCart();
+      this.router.navigate(['/order-info']);
+    },
+      err => {
+        const modalRef = this.modalService.open(NgbdModalContentComponent);
+        modalRef.componentInstance.message = err.error.message;
+      });
   }
 
   setOrder(shopId: number) {

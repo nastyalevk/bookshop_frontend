@@ -11,20 +11,10 @@ const Url = 'http://localhost:8087/';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   getPublicContent(): Observable<any> {
     return this.http.get<Book[]>(Url + 'book');
-  }
-
-  getUserBoard(): Observable<any> {
-    return this.http.get(Url + 'client', { responseType: 'text' });
-  }
-
-  getOwnerBoard(): Observable<any> {
-    return this.http.get(Url + 'own', { responseType: 'text' });
   }
 
   findAll(): Observable<User[]> {

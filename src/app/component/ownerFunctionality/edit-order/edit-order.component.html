@@ -102,7 +102,7 @@
                                     </figure>
                                 </td>
                                 <td>
-                                    <div *ngIf="isClient">
+                                    <div *ngIf="!isOwner">
                                         <input disabled [(ngModel)]="orderContent.quantity" name="orderContent.quantity"
                                             class="form-control" id="quantity"
                                             placeholder="{{ orderContent.quantity }}">

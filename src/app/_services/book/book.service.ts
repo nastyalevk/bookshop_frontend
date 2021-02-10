@@ -20,13 +20,8 @@ export class BookService {
     return this.http.get(bookUrl + id);
   }
 
-  getShop(id: number): Observable<any> {
-    return this.http.get("http://localhost:8087/shop/book/" + id);
-  }
-
-  getShopPrice(bookId: number, shopId: number): Observable<any> {
-    console.log("oiuiyutvyrctexrwz")
-    return this.http.get("http://localhost:8087/assortment/price/" + bookId + "/" + shopId);
+  isBook(id: number): Observable<boolean> {
+    return this.http.get<boolean>(bookUrl+"exist/" + id);
   }
 
   saveBook(book: Book): Observable<Book> {

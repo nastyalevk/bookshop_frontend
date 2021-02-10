@@ -32,7 +32,7 @@ export class ShopPersonalPageComponent implements OnInit {
     this.shopId = this.route.snapshot.params.shopId;
     this.shop = new Shop();
     this.roles = this.tokenStorageService.getUser().roles;
-    this.isLoggedIn = !this.tokenStorageService.getToken();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.isClient = this.roles.includes('ROLE_CLIENT');
     }

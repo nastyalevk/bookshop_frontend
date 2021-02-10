@@ -5,5 +5,5 @@ export class ShopReview {
     rating: number | undefined;
     shopId: number | undefined;
     datetime: string | undefined;
-
+    approved: boolean | undefined;
 }

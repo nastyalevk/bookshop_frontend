@@ -39,6 +39,8 @@
                             </div>
                         </div>
                         <ngb-rating [(rate)]="review.rating"></ngb-rating>
+                        <button *ngIf="currentUser==review.username" type="button" class="btn btn-outline-secondary btn-sm float-right"
+                                (click)="editComment(review.id)">Edit</button>
                         <p>
                             {{review.comment}}<br>
                         </p>

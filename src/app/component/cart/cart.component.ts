@@ -77,7 +77,7 @@ export class CartComponent implements OnInit {
   isAvaliableSet() {
 
   }
-  isBookAvaliable(bookId: number, shopId: number): boolean {
+  isBookAvaliable(bookId: number, shopId: number) {
     console.log(this.isAvaliable)
     return this.isAvaliable.get(bookId.toString() + shopId.toString());
   }

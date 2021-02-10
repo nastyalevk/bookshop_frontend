@@ -52,15 +52,11 @@ export class BookPersonalPageInShopComponent implements OnInit {
     console.log(this.assortment);
     this.assortmentService.saveAssortment(this.assortment).subscribe(data => {
       this.assortment = this.assortment;
+      this.ngOnInit()
     });
-    window.location.reload();
-
-    // this.router.navigate([`/shop/${this.shopId}`]);  
   }
 
   deleteFromShop() {
-    this.assortmentService.deleteAssortment(this.bookId, this.shopId).subscribe();
-    // this.router.navigate([`/shop/${this.shopId}`]);
-
+    this.assortmentService.deleteAssortment(this.bookId, this.shopId).subscribe(()=>{this.ngOnInit()});
   }
 }

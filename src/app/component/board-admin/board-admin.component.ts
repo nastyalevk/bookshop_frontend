@@ -75,6 +75,15 @@ export class BoardAdminComponent implements OnInit {
       this.router.navigate(['new']);
     }
   }
+  editUsers() {
+    this.router.navigate(['admin']);
+  }
+  BookApproveComment() {
+    this.router.navigate(['admin/book/comments']);
+  }
 
+  ShopApproveComment() {
+    this.router.navigate(['admin/shop/comments']);
+  }
 }
 

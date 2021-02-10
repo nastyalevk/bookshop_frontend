@@ -55,9 +55,7 @@ export class NewBookComponent implements OnInit {
       this.assortment.shopId = this.id;
       this.assortment.creationDate = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
       console.log(this.assortment);
-      this.assortmentService.saveAssortment(this.assortment).subscribe();
+      this.assortmentService.saveAssortment(this.assortment).subscribe(()=>{this.ngOnInit()});
     });
-    window.location.reload();
-
   }
 }

@@ -7,7 +7,7 @@
                     <p class="lead">{{shop.address}}</p>
                     <p class="lead">{{shop.city}}</p>
                     <p class="lead">{{shop.country}}</p>
-                    <p *ngIf="!isClient"><button type="button" class="btn btn-lg btn-success" (click)="goToLogin()"
+                    <p><button  *ngIf="!isClient" type="button" class="btn btn-lg btn-success" (click)="goToLogin()"
                             role="button">Sign up</button>
                     </p>
                     <button type="button" class="btn btn-primary" (click)=goToShopReview()>

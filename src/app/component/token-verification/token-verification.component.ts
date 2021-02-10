@@ -18,7 +18,7 @@ export class TokenVerificationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.verifyToken(this.token).subscribe(      () => {
+    this.authService.verifyToken(this.token).subscribe(() => {
       this.isSuccessful = true;
     },
     err => {
