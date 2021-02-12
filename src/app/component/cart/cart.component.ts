@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   fullPrice = 0;
   assortment: Assortment;
   isAvaliable: Map<string, boolean>;
-  shopNames:string[]=[];
+  shopNames: string[] = [];
   constructor(private router: Router, private cartService: CartService, private assortmentService: AssortmentService, private shopService: ShopService) {
     this.items = this.cartService.toArray();
     this.assortment = new Assortment();
@@ -34,9 +34,19 @@ export class CartComponent implements OnInit {
     for (let i of this.items) {
       this.isAvaliable.set(i.book.id.toString() + i.assortment.shopId.toString(), true);
     }
-    for(let i of this.items){
-      this.shopService.getShop(i.assortment.shopId).subscribe(data=>{
+    for (let i of this.items) {
+      this.shopService.getShop(i.assortment.shopId).subscribe(data => {
         this.shopNames.push(data.shopName);
+      });
+      this.assortmentService.getOne(i.book.id, i.assortment.shopId).subscribe(data => {
+        console.log(this.assortment);
+        this.assortment = data;
+        if (this.assortment.quantity < i.quantity) {
+          this.isAvaliable.set(i.book.id.toString() + i.assortment.shopId.toString(), false);
+        } else {
+          this.isAvaliable.set(i.book.id.toString() + i.assortment.shopId.toString(), true);
+
+        }
       });
     }
   }

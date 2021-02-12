@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/model/order/order';
 import { OrderService } from 'src/app/_services/order/order.service';
 import { ShopService } from 'src/app/_services/shop/shop.service';
+import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
 
 @Component({
   selector: 'app-board-client',
@@ -18,10 +19,19 @@ export class BoardClientComponent implements OnInit {
   count = 0;
   pageSize = 9;
   pageSizes = [9, 12, 15];
-
+  private roles: string[] = [];
+  isClient = false;
+  isLoggedIn = false;
   constructor(private orderService: OrderService, private router: Router,
-    private shopService: ShopService) {
+    private shopService: ShopService, private tokenStorageService: TokenStorageService) {
       this.shops = new Map<number, string>();
+      this.isLoggedIn = !!this.tokenStorageService.getToken();
+      console.log(this.isLoggedIn);
+      if (this.isLoggedIn) {
+        this.roles = this.tokenStorageService.getUser().roles;
+        console.log(this.roles);
+        this.isClient = this.roles.includes('ROLE_CLIENT');
+      }
      }
 
   ngOnInit(): void {

@@ -8,6 +8,8 @@
         <div class="form-group" >
             <button *ngIf = "isAdmin" type="submit" class="btn btn-info" (click)="saveBookReviewAdmin()">Approve</button>
             <button *ngIf = "!isAdmin" type="submit" class="btn btn-info" (click)="saveBookReviewClient()">Save</button>
+            <button *ngIf = "isAdmin" type="submit" class="btn btn-danger float-right" (click)="deleteBookReviewAdmin()"><i
+                class="fa fa-trash" aria-hidden="true"></i> Delete</button>        
         </div>
     </div>
     <div *ngIf="isShopReview">
@@ -18,8 +20,9 @@
         </div>
         <div class="form-group">
             <button *ngIf = "isAdmin" type="submit" class="btn btn-info" (click)="saveShopReviewAdmin()">Approve</button>
-            <button *ngIf = "!isAdmin" type="submit" class="btn btn-info" (click)="saveBookReviewClient()">Save</button>
-
+            <button *ngIf = "!isAdmin" type="submit" class="btn btn-info" (click)="saveShopReviewClient()">Save</button>
+            <button *ngIf = "isAdmin" type="submit" class="btn btn-danger float-right" (click)="deleteShopReviewAdmin()"><i
+                class="fa fa-trash" aria-hidden="true"></i> Delete</button>    
         </div>
     </div>
 

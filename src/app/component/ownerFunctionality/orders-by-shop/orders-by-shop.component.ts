@@ -4,6 +4,7 @@ import { Order } from 'src/app/model/order/order';
 import { BookService } from 'src/app/_services/book/book.service';
 import { OrderService } from 'src/app/_services/order/order.service';
 import { ShopService } from 'src/app/_services/shop/shop.service';
+import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
 
 @Component({
   selector: 'app-orders-by-shop',
@@ -16,15 +17,21 @@ export class OrdersByShopComponent implements OnInit {
   orders: Order[] = [];
   currentOrder?: Order;
   currentIndex = -1;
+  username: string;
+  isOwner = false;
+  isLoggedIn = false;
 
   page = 1;
   count = 0;
   pageSize = 9;
   pageSizes = [9, 12, 15];
-  constructor(private route: ActivatedRoute, protected router: Router, private orderService: OrderService, 
-    private shopService: ShopService, private bookService: BookService) { 
-      this.id = this.route.snapshot.params.id;
-    }
+  constructor(private route: ActivatedRoute, protected router: Router, private orderService: OrderService,
+    private tokenStorageService: TokenStorageService) {
+    this.id = this.route.snapshot.params.id;
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.username = this.tokenStorageService.getUser().username;
+
+  }
 
   ngOnInit(): void {
     this.getAllOrders();
@@ -40,10 +47,11 @@ export class OrdersByShopComponent implements OnInit {
       this.count = totalElements;
       console.log(response);
     },
-    error => {
-      console.log(error);
-    });
-   
+      error => {
+        console.log(error);
+        this.router.navigate([`/error`]);
+      });
+
   }
   editShop() {
     this.router.navigate([`/shop/edit/${this.id}`]);
@@ -52,15 +60,15 @@ export class OrdersByShopComponent implements OnInit {
     this.router.navigate([`/shop/newBook/${this.id}`]);
   }
 
-  addBook(){
+  addBook() {
     this.router.navigate([`/shop/addBooks/${this.id}`]);
   }
 
-  shopAssortment(){
+  shopAssortment() {
     this.router.navigate([`/shop/${this.id}`]);
   }
 
-  goToOrder(orderId: number){
+  goToOrder(orderId: number) {
     this.router.navigate([`order/edit/${orderId}`]);
   }
 

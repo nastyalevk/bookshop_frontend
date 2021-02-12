@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShopReview } from 'src/app/model/review/shop/shop-review';
 import { ReviewService } from 'src/app/_services/review/review.service';
+import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
 
 @Component({
   selector: 'app-shop-comment-approve',
@@ -11,8 +12,17 @@ import { ReviewService } from 'src/app/_services/review/review.service';
 export class ShopCommentApproveComponent implements OnInit {
 
   reviews: ReviewService[] = [];
-
-  constructor(protected router: Router, private reviewService: ReviewService) { }
+  private roles: string[] = [];
+  isAdmin = false;
+  isLoggedIn = false;
+  constructor(protected router: Router, private reviewService: ReviewService, private tokenStorageService: TokenStorageService) {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    console.log(this.isLoggedIn);
+    if (this.isLoggedIn) {
+      this.roles = this.tokenStorageService.getUser().roles;
+      console.log(this.roles);
+      this.isAdmin = this.roles.includes('ROLE_ADMIN');
+    }}
 
   ngOnInit(): void {
     this.reviewService.getShopReviewAdmin().subscribe(data=>{

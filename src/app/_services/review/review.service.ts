@@ -44,4 +44,12 @@ export class ReviewService {
   saveShopReview(review: ShopReview): Observable<ShopReview>{
     return this.http.post<ShopReview>(Url+ "/shop/create/", review);
   }
+
+  deleteBookReview(review: BookReview): Observable<any>{
+    return this.http.post(Url+ "/delete/book/", review);
+  }
+
+  deleteShopReview(review: ShopReview): Observable<any>{
+    return this.http.post(Url+ "/delete/shop/", review);
+  }
 }

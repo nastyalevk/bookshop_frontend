@@ -16,6 +16,10 @@ export class AssortmentService {
     return this.http.post<Assortment>(Url + "/create", assortment);
   }
 
+  updateAssortment(assortment: Assortment): Observable<Assortment> {
+    return this.http.post<Assortment>(Url + "/update", assortment);
+  }
+
   existsByBook(bookId: any, shopId: number): Observable<boolean> {
     return this.http.get<boolean>(Url + "/exists/" + bookId + "/" + shopId);
   }

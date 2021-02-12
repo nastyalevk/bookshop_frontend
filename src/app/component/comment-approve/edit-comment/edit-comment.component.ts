@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Book } from 'src/app/model/book/book';
 import { BookReview } from 'src/app/model/review/book/book-review';
 import { ShopReview } from 'src/app/model/review/shop/shop-review';
@@ -8,6 +9,7 @@ import { BookService } from 'src/app/_services/book/book.service';
 import { ReviewService } from 'src/app/_services/review/review.service';
 import { ShopService } from 'src/app/_services/shop/shop.service';
 import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
+import { NgbdModalContentComponent } from '../../ngbd-modal-content/ngbd-modal-content.component';
 
 @Component({
   selector: 'app-edit-comment',
@@ -31,7 +33,8 @@ export class EditCommentComponent implements OnInit {
   isLoggedIn = false;
 
   constructor(private bookService: BookService, private shopService: ShopService, protected router: Router,
-    private route: ActivatedRoute, private reviewService: ReviewService, private tokenStorageService: TokenStorageService) {
+    private route: ActivatedRoute, private reviewService: ReviewService, private tokenStorageService: TokenStorageService,
+    private modalService: NgbModal) {
     this.reviewId = this.route.snapshot.params.reviewId;
     this.shopId = this.route.snapshot.params.shopId;
     this.bookId = this.route.snapshot.params.bookId;
@@ -85,11 +88,29 @@ export class EditCommentComponent implements OnInit {
   saveBookReviewClient() {
     this.bookReview.approved = false;
     this.reviewService.saveBookReview(this.bookReview).subscribe();
-    this.router.navigate([`book/${this.objectId}`]);
+    this.router.navigate([`book/${this.bookId}`]);
   }
   saveShopReviewClient() {
     this.shopReview.approved = false;
     this.reviewService.saveShopReview(this.shopReview).subscribe();
-    this.router.navigate([`shop/${this.objectId}`]);
+    this.router.navigate([`shop/${this.shopId}`]);
+  }
+
+  deleteBookReviewAdmin() {
+    this.reviewService.deleteBookReview(this.bookReview).subscribe(() => { this.router.navigate(['admin/book/comments']); },
+      err => {
+        console.log(err.error.message);
+        const modalRef = this.modalService.open(NgbdModalContentComponent);
+        modalRef.componentInstance.message = err.error.message;
+      });
+  }
+
+  deleteShopReviewAdmin() {
+    this.reviewService.deleteShopReview(this.shopReview).subscribe(() => { this.router.navigate(['admin/shop/comments']); },
+      err => {
+        console.log(err.error.message);
+        const modalRef = this.modalService.open(NgbdModalContentComponent);
+        modalRef.componentInstance.message = err.error.message;
+      });
   }
 }
