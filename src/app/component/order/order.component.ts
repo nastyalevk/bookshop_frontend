@@ -98,7 +98,7 @@ export class OrderComponent implements OnInit {
     this.order.deliveryAddress = this.deliveryAddress;
     this.order.description = this.description;
     this.order.cost = 0;
-    this.order.classification = 'open';
+    this.order.classification = 'OPEN';
     this.order.orderSubmitDate = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
     this.order.shopId = shopId;
     if (this.model) {

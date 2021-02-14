@@ -63,7 +63,6 @@ export class BookComponent implements OnInit {
       this.currentUser = this.tokenStorageService.getUser().username;
     }
     config.max = 10;
-    config.readonly = true;
   }
 
   ngOnInit() {
@@ -72,6 +71,7 @@ export class BookComponent implements OnInit {
         this.book = data;
         this.assortmentService.getByBook(data.id).subscribe(data => {
           this.assortments = data;
+          console.log(this.assortments);
           for (let i of this.assortments) {
             this.shopService.getShop(i.shopId).subscribe(data => {
               this.shopAssortment.set(i, data);
@@ -122,14 +122,14 @@ export class BookComponent implements OnInit {
   saveComment() {
     this.review.bookId = this.id;
     this.review.datetime = this.yyyy + "-" + this.mm + "-" + this.dd + " " + this.hh + ":" + this.MM + ":" + this.ss;
-    this.reviewService.saveBookReview(this.review).subscribe(() => { this.ngOnInit() });
+    this.reviewService.saveBookReview(this.review).subscribe(() => { this.ngOnInit(); });
   }
 
   isOpen(classification: string): boolean {
-    if (classification == "open") {
+    if (classification == "OPEN") {
       return true;
     }
-    if (classification == "active") {
+    if (classification == "ACTIVE") {
       return true;
     }
     return false;

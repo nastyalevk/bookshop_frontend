@@ -15,7 +15,7 @@ export class CreateNewShopComponent implements OnInit {
 
   shop: Shop;
   user: User;
-  classifications=["open", "terminated", "closed"];
+  classifications=["QOPEN", "TERMINATED", "CLOSED"];
 
   constructor(protected router: Router, private shopService: ShopService,
     private userService: UserService, private tokenStorage: TokenStorageService) {

@@ -43,7 +43,6 @@ export class ShopReviewComponent implements OnInit {
       this.currentUser = this.tokenStorageService.getUser().username;
     }
     config.max = 10;
-    config.readonly = true;
   }
 
   ngOnInit(): void {

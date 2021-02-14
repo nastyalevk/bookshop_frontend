@@ -96,21 +96,38 @@ export class EditCommentComponent implements OnInit {
     this.router.navigate([`shop/${this.shopId}`]);
   }
 
-  deleteBookReviewAdmin() {
+  deleteBookReview() {
+    if(this.isAdmin){
     this.reviewService.deleteBookReview(this.bookReview).subscribe(() => { this.router.navigate(['admin/book/comments']); },
       err => {
         console.log(err.error.message);
         const modalRef = this.modalService.open(NgbdModalContentComponent);
         modalRef.componentInstance.message = err.error.message;
-      });
+      });}
+      if(this.isClient){
+        this.reviewService.deleteBookReview(this.bookReview).subscribe(() => {this.router.navigate([`book/${this.bookId}`]);},
+          err => {
+            console.log(err.error.message);
+            const modalRef = this.modalService.open(NgbdModalContentComponent);
+            modalRef.componentInstance.message = err.error.message;
+          });}
   }
 
-  deleteShopReviewAdmin() {
+  deleteShopReview() {
+    if(this.isAdmin){
     this.reviewService.deleteShopReview(this.shopReview).subscribe(() => { this.router.navigate(['admin/shop/comments']); },
       err => {
         console.log(err.error.message);
         const modalRef = this.modalService.open(NgbdModalContentComponent);
         modalRef.componentInstance.message = err.error.message;
-      });
+      });}
+      if(this.isClient){
+        this.reviewService.deleteShopReview(this.shopReview).subscribe(() => {this.router.navigate([`shop/${this.shopId}`]);
+      },
+          err => {
+            console.log(err.error.message);
+            const modalRef = this.modalService.open(NgbdModalContentComponent);
+            modalRef.componentInstance.message = err.error.message;
+          });}
   }
 }

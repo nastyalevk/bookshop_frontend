@@ -5,7 +5,7 @@
             <thead class="text-muted">
                 <tr>
                     <th scope="col">Product</th>
-                    <th scope="col" width="120">Quantity</th>
+                    <th scope="col" width="140">Quantity</th>
                     <th scope="col" width="120">Price</th>
                     <th scope="col" width="200" class="text-right">Action</th>
                 </tr>
@@ -23,17 +23,22 @@
                                 </dl>
                                 <h6 class="title text-truncate">Shop: {{shopNames[i]}} </h6>
                                 <div *ngIf="!isBookAvaliable(item.book.id, item.assortment.shopId)">
-                                    <h6 class="title text-danger">Isnt avaliavle in this quantity</h6>
+                                    <h6 class="title text-danger">Isnt avaliable in this quantity</h6>
                                 </div>
                             </figcaption>
                         </figure>
                     </td>
                     <td>
-                        <select [(ngModel)]="item.quantity" class="form-control" (change)="handleQuantityChange(item)">
-                            <option *ngFor="let quantity of bookQuantity" [ngValue]="quantity">
-                                {{ quantity }}
-                            </option>
-                        </select>
+                        <div class="input-group spinner">
+                            <input class="form-control" [(ngModel)]="item.quantity" name="item.quantity" value="1"
+                                min="0">
+                            <div class="input-group-btn-vertical">
+                                <button class="btn btn-primary btn-sm" type="button" (click)="handlePlus(item)"><i
+                                        class="fa fa-caret-up"></i></button>
+                                <button class="btn btn-primary btn-sm" type="button" (click)="handleMinus(item)"><i
+                                        class="fa fa-caret-down"></i></button>
+                            </div>
+                        </div>
                     </td>
                     <td>
                         <div class="price-wrap">
@@ -55,7 +60,7 @@
                 Make an
                 order</button>
         </div>
-        
+
 
     </div>
 </div>

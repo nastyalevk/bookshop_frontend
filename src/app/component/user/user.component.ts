@@ -13,8 +13,7 @@ export class UserComponent implements OnInit {
   user: User;
   roles: string[] = [];
   rolesChange: string[] = [];
-  acrivatedFlag = 0;
-
+  activatedFlag = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,10 +25,11 @@ export class UserComponent implements OnInit {
     if (this.rolesChange[0]) {
       let params: any = {};
       params[`roles`] = this.rolesChange;
-      params[`id`] = this.user.id
+      params[`id`] = this.user.id;
+      params[`message`] = this.user.message?.replace(" ", "_");
       this.userService.updateRoles(params).subscribe();
     }
-    this.userService.save(this.user).subscribe(result => this.gotoUserList());
+    this.userService.update(this.user).subscribe(result => this.gotoUserList());
   }
 
   gotoUserList() {
@@ -58,7 +58,7 @@ export class UserComponent implements OnInit {
 
   activatedChange(state: boolean) {
     this.user.activated = state;
-    this.acrivatedFlag++;
+    this.activatedFlag++;
   }
 
   changeRoleStatus(roleName: string, state: boolean) {

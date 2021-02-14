@@ -15,7 +15,7 @@ export class NewBookComponent implements OnInit {
   book = new Book();
   id: number;
   assortment = new Assortment();
-  classifications=["open", "active", "waiting", "closed"];
+  classifications=["OPEN", "ACTIVE", "WAITING", "CLOSED"];
 
   bookId:number;
   today = new Date();

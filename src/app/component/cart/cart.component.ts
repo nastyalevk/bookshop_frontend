@@ -55,27 +55,7 @@ export class CartComponent implements OnInit {
     this.cartService.remove(item);
     this.ngOnInit();
   }
-
-  handleQuantityChange(item: Cart): void {
-    console.log(item);
-    this.cartService.addToCart(item);
-    this.fullPrice = 0;
-
-    this.assortmentService.getOne(item.book.id, item.assortment.shopId).subscribe(data => {
-      console.log(this.assortment);
-      this.assortment = data;
-      if (this.assortment.quantity < item.quantity) {
-        this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), false);
-      } else {
-        this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), true);
-
-      }
-    });
-    for (let i of this.items) {
-      this.fullPrice += i.quantity * i.assortment.price;
-    }
-  }
-
+  
   isOrderButton(): boolean {
     for (let [key, value] of this.isAvaliable) {
       if (!this.isAvaliable.get(key)) {
@@ -93,5 +73,47 @@ export class CartComponent implements OnInit {
   }
   order() {
     this.router.navigate(['/order']);
+  }
+
+  handleMinus(item: Cart) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.cartService.addToCart(item);
+      this.fullPrice = 0;
+
+      this.assortmentService.getOne(item.book.id, item.assortment.shopId).subscribe(data => {
+        console.log(this.assortment);
+        this.assortment = data;
+        if (this.assortment.quantity < item.quantity) {
+          this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), false);
+        } else {
+          this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), true);
+
+        }
+      });
+      for (let i of this.items) {
+        this.fullPrice += i.quantity * i.assortment.price;
+      }
+    }
+
+  }
+  handlePlus(item: Cart) {
+    item.quantity++;
+    this.cartService.addToCart(item);
+    this.fullPrice = 0;
+
+    this.assortmentService.getOne(item.book.id, item.assortment.shopId).subscribe(data => {
+      console.log(this.assortment);
+      this.assortment = data;
+      if (this.assortment.quantity < item.quantity) {
+        this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), false);
+      } else {
+        this.isAvaliable.set(item.book.id.toString() + item.assortment.shopId.toString(), true);
+
+      }
+    });
+    for (let i of this.items) {
+      this.fullPrice += i.quantity * i.assortment.price;
+    }
   }
 }

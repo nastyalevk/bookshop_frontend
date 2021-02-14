@@ -17,7 +17,7 @@ export class AddExistentBookInShopComponent implements OnInit {
   shopId: number;
   book: Book;
   today = new Date();
-  classifications=["open", "active", "waiting", "closed"];
+  classifications=["OPEN", "ACTIVE", "WAITING", "CLOSED"];
 
   dd = String(this.today.getDate()).padStart(2, '0');
   mm = String(this.today.getMonth() + 1).padStart(2, '0');

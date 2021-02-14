@@ -30,6 +30,11 @@ export class UserService {
     return this.http.post<User>(Url + 'user/create/', user);
   }
 
+  update(user: User) {
+    console.log(user);
+    return this.http.post<User>(Url + 'user/update/', user);
+  }
+
   updateRoles(params: any) {
     return this.http.get<any>(Url + 'user/update-roles/', { params });
   }

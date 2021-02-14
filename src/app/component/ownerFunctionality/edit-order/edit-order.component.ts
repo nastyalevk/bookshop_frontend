@@ -25,7 +25,7 @@ export class EditOrderComponent implements OnInit {
   isClient = false;
   isOwner = false;
   quantities: Map<[number, number], number>;
-  classifications = ["open", "submitted", "processing", "processed", "canceled"];
+  classifications = ["OPEN", "SUBMITTED", "PROCESSING", "PROCESSED", "CANCELED"];
   fullPrice = 0;
 
   dd: number;

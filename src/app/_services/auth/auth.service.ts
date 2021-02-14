@@ -32,6 +32,13 @@ export class AuthService {
     }, httpOptions);
   }
 
+  newUser(username: string, email: string): Observable<any> {
+    return this.http.post(AUTH_API + 'user/new', {
+      username,
+      email
+    }, httpOptions);
+  }
+
   verifyToken(token: string): Observable<any>{
     return this.http.get<any>(AUTH_API + `verify/?code=${token}`);
   }

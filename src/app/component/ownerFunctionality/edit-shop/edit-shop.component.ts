@@ -14,7 +14,7 @@ export class EditShopComponent implements OnInit {
 
   id: number;
   shop: Shop;
-  classifications=["open", "closed", "terminated"];
+  classifications=["OPEN", "CLOSED", "TERMINATED"];
   constructor(private route: ActivatedRoute, protected router: Router, private shopService: ShopService,
     private modalService: NgbModal) {
     this.id = this.route.snapshot.params.id;

@@ -3,19 +3,23 @@
     <form #userForm="ngForm">
       <div class="form-group">
         <label for="userName">username</label>
-        <textarea disabled class="form-control" id="username" placeholder="not specified">{{user.username}}</textarea>
+        <input disabled class="form-control" id="username" placeholder="not specified" [(ngModel)]="user.username"
+          name="username">
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <textarea disabled class="form-control" id="email" placeholder="not specified">{{user.email}}</textarea>
+        <input disabled class="form-control" id="email" placeholder="not specified" [(ngModel)]="user.email"
+          name="email">
       </div>
       <div class="form-group">
         <label for="firstName">First Name</label>
-        <textarea disabled class="form-control" id="firstName" placeholder="not specified">{{user.firstName}}</textarea>
+        <input disabled class="form-control" id="firstName" placeholder="not specified" [(ngModel)]="user.firstName"
+          name="firstName">
       </div>
       <div class="form-group">
         <label for="lastName">Last Name</label>
-        <textarea disabled class="form-control" id="LastName" placeholder="not specified">{{user.lastName}}</textarea>
+        <input textarea disabled class="form-control" id="LastName" placeholder="not specified"
+          [(ngModel)]="user.lastName" name="lastName">
       </div>
 
       <div class="form-group">
@@ -54,8 +58,13 @@
           (click)="changeRoleStatus('ROLE_ADMIN', true)">activate</button>
       </div>
 
+      <div class="form-group" *ngIf="activatedFlag%2 || rolesChange.length">
+        <label for="changingStatus">reason for changes</label>
+        <input class="form-control" id="changingStatus" placeholder="not specified" [(ngModel)]="user.message"
+        name="message">
+      </div>
 
-      <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-info" (click)="onSubmit()">Save</button>
+      <button type="submit" class="btn btn-info" (click)="onSubmit()">Save</button>
     </form>
   </div>
 
